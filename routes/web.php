@@ -30,10 +30,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth','admin'])->group(function() {
     Route::get('/dashboard', [FrontendController::class, 'index']); 
 
+    //Route::resource("/products", ProductController::class);
     Route::get('products', [ProductController::class, 'index'])->name('products');      
-    Route::get('add-products', [ProductController::class, 'add']);      
-    Route::get('add-products/save', [ProductController::class, 'save'])->name('products.save');
-    
+    Route::get('products/add', [ProductController::class, 'add'])->name('products.add');      
+    Route::post('products/add/save', [ProductController::class, 'save'])->name('products.save');
+    Route::get('products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
+    Route::get('products/update/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('products/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
+
     Route::get('categories', [CategoryController::class, 'index']);
     Route::get('add-categories', [CategoryController::class, 'add']);
     Route::get('add-categories/save', [CategoryController::class, 'save']);

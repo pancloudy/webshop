@@ -6,7 +6,7 @@
 <a href="{{ url('products') }}">
     <p>products</p>
 </a>
-<a href="{{ url('add-products') }}">
+<a href="{{ url('products/add') }}">
     <p>add products</p>
 </a>
 <a href="{{ url('category') }}">

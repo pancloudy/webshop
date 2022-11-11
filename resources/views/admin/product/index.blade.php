@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<a href="{{ url('/products/add') }}" class="btn btn-success btn-sm" title="Add New Contact">
+    <i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -35,7 +37,7 @@
                     {{ $products->selling_price ?? false}}
                 </td>
                 <td>
-                    {{ $products->image ?? false}}
+                    <img src="{{ asset('images/' . $products->image) }}" height="50" width = "50" class="img img-responsive" />
                 </td>
                 <td>
                     {{ $products->quantity ?? false}}

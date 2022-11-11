@@ -12,27 +12,80 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function index(){
-        $product = DB::table('products')->get();
-        return view('admin.product.index', compact('product'));
+        //$product = DB::table('products')->get();
+        //return view('admin.product.index', compact('product'));
+        $product = Product::all();
+        return view('admin.product.index')->with('product', $product);
     }
     public function add(Product $productModel){
-        $data = ['newdata' => $productModel::all()];
-        return view('admin.product.add', $data);
+        return view('admin.product.add');
     }
     public function save(Request $request){
-        $products= new Product();
         
-        $products->category_id = $request->input('category_id');
-        $products->name = $request->input('name');
-        $products->small_description = $request->input('small_description');
-        $products->description = $request->input('description');
-        $products->original_price = $request->input('original_price');
-        $products->selling_price = $request->input('selling_price');
-        $products->quantity = $request->input('quantity');
-        $products->image = $request->input('image');
-        $products->status = $request->input('status') == TRUE ? '1':'0';
-        $products->save();
-        $product = ['list' =>Product::all('category_id', 'name', 'small_description', 'image', 'description','original_price', 'selling_price','quantity', 'status')];
-        return redirect('products')->with('status',"Product added succesfully");
+        //$requestData = $request->all();
+        //$fileName = time().$request->file('image')->getClientOriginalName();
+        //$path = $request->file('image')->storeAs('images', $fileName, 'public');
+        //$requestData["image"] = '/storage/images/'.$path;
+        //Product::create($requestData);
+        //return redirect('products')->with('flash_message',"Product added succesfully");
+
+
+        $request->validate([
+            'image' => 'required|mimes:png,jpg,jpeg|max:5048'
+        ]);
+
+        $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+
+        $request->image->extension();
+
+        $request->image->move(public_path('images'), $newImageName);
+
+        $product = Product::create([
+            'category_id' => $request->input('category_id'),
+            'name' => $request->input('name'),
+            'small_description' => $request->input('small_description'),
+            'description' => $request->input('description'),
+            'original_price' => $request->input('original_price'),
+            'selling_price' => $request->input('selling_price'),
+            'image' => $newImageName,
+            'quantity' => $request->input('quantity'),
+            'status' => $request->input('status'),
+            
+        ]);
+
+        return redirect('/products/add');
+    }
+    public function edit($id){
+        $product = DB::select('select * from products where id=?',[$id]);
+        return view('product.edit', ['product'=>$product]);
+    }
+    public function update(Request $request, $id){
+        $category_id=$request->get('category_id');
+        $name=$request->get('name');
+        $small_description=$request->get('small_description');
+        $description=$request->get('description');
+        $original_price=$request->get('original_price');
+        $selling_price=$request->get('selling_price');
+        $image=$request->get('image');
+        $quantity=$request->get('quantity');
+        $status=$request->get('status');
+
+        $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
+        description=?, original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
+         $description, $original_price, $selling_price, $image, $quantity, $status]);
+
+
+        if($product){
+            $redirect = redirect('products')->with('success');
+        }else{
+            $redirect = redirect('products.edit')->with('error');
+        }
+        return $redirect;
+    }
+    public function delete($id){
+
+        $product = DB::delete('delete from products where id=?', [$id]);
+        $redirect = redirect('main/listusers');
+        return $redirect('products');
     }
 }

@@ -4,8 +4,8 @@
     <div class="card-header">
         <h4>Add products</h4>
     </div>
-    <form action="{{ route("products.save") }}" enctype="multipart/form-data">
-
+    <form action="{{ route("products.save") }}" method="post" enctype="multipart/form-data">
+        @csrf
 
         category_id: <input type="number" name="category_id" value="">
         <br>
@@ -21,7 +21,7 @@
         <br>
             
             Select image to upload:
-            <input type="file" name="image" value="">
+            <input class="form-control" type="file" name="image" id="image">
 
         <br>
         quantity: <input type="text" name="quantity" value="">
@@ -29,8 +29,8 @@
         status:
         <select name="status">
             <option value="null"></option>
-            <option value="out_of_stock">out of stock</option>
-            <option value="in_stock">in stock</option>
+            <option value="0">out of stock</option>
+            <option value="1">in stock</option>
         </select>
         <br>
     

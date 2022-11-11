@@ -25,7 +25,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     
 
-                    <a class="nav-link" href="{{ route('app') }}">{{ __('Home') }}</a>
+                    <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
