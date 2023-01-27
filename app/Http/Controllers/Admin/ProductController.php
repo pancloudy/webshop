@@ -22,14 +22,6 @@ class ProductController extends Controller
     }
     public function save(Request $request){
         
-        //$requestData = $request->all();
-        //$fileName = time().$request->file('image')->getClientOriginalName();
-        //$path = $request->file('image')->storeAs('images', $fileName, 'public');
-        //$requestData["image"] = '/storage/images/'.$path;
-        //Product::create($requestData);
-        //return redirect('products')->with('flash_message',"Product added succesfully");
-
-
         $request->validate([
             'image' => 'required|mimes:png,jpg,jpeg|max:5048'
         ]);
@@ -56,10 +48,16 @@ class ProductController extends Controller
         return redirect('/products/add');
     }
     public function edit($id){
-        $product = DB::select('select * from products where id=?',[$id]);
-        return view('product.edit', ['product'=>$product]);
+        //$products = Product::find($id);
+       
+        $product = DB::select('SELECT * from products where id=?', [$id]);
+        return view('admin.product.edit', ['product'=>$product], ['id'=>$id]);
     }
     public function update(Request $request, $id){
+        $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+        $request->image->extension();
+        $request->image->move(public_path('images'), $newImageName);
+
         $category_id=$request->get('category_id');
         $name=$request->get('name');
         $small_description=$request->get('small_description');
@@ -71,8 +69,9 @@ class ProductController extends Controller
         $status=$request->get('status');
 
         $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
-        description=?, original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
-         $description, $original_price, $selling_price, $image, $quantity, $status]);
+        original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
+         $description, $original_price, $selling_price, $newImageName, $quantity, $status, $id]);
+
 
 
         if($product){
@@ -85,7 +84,6 @@ class ProductController extends Controller
     public function delete($id){
 
         $product = DB::delete('delete from products where id=?', [$id]);
-        $redirect = redirect('main/listusers');
-        return $redirect('products');
+        return redirect('products');
     }
 }

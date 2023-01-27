@@ -45,6 +45,20 @@
                 <td>
                     {{ $products->status ?? false}}
                 </td>
+                <td>
+                    {{ $id =$products->id }}
+                    <form action="{{ route('products.edit', $id) }}"  class="btn btn-primary">
+                    @csrf
+                    
+                    <button type="submit">Edit</button>
+                    </form>
+                    <form action="{{ route('products.delete', $products->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                    
+                </td>
             </tr>
         @endforeach
         </thead>
