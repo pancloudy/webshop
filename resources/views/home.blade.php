@@ -54,4 +54,5 @@
         </div>
     </div>
 </div>
+@extends('layouts.products-list')
 @endsection

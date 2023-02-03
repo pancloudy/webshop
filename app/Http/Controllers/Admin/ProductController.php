@@ -17,6 +17,12 @@ class ProductController extends Controller
         $product = Product::all();
         return view('admin.product.index')->with('product', $product);
     }
+    public function list(){
+        //$product = DB::table('products')->get();
+        //return view('admin.product.index', compact('product'));
+        $product = Product::all();
+        return view('layouts.products-list')->with('product', $product);
+    }
     public function add(Product $productModel){
         return view('admin.product.add');
     }
