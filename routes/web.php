@@ -32,6 +32,7 @@ Route::middleware(['auth','admin'])->group(function() {
 
     //Route::resource("/products", ProductController::class);
     Route::get('products', [ProductController::class, 'index'])->name('products');      
+    Route::get('product', [ProductController::class, 'list'])->name('products.list');      
     Route::get('products/add', [ProductController::class, 'add'])->name('products.add');      
     Route::post('products/add/save', [ProductController::class, 'save'])->name('products.save');
     Route::get('products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
