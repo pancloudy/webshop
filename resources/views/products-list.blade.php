@@ -27,6 +27,7 @@ text-decoration: line-through;
 </style>
 <br>
 @foreach ($product as $products )
+<form action="{{ action('App\Http\Controllers\Admin\ProductController@details', $products->id) }}"  enctype="multipart/form-data" >
 <div class=="row">
     <div class="column">
         {{ $products->name }}
@@ -39,9 +40,11 @@ text-decoration: line-through;
         @else
         {{ $products->selling_price }}
         @endif
+        <button type="submit">Megtekintés</button>
     </div>
 
 </div>
+</form>
 @endforeach
 <!--<?php
 $i = 0;

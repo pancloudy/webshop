@@ -25,14 +25,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('product', [ProductController::class, 'list'])->name('products.list');
+Route::get('product/{image}', [ProductController::class, 'details'])->name('products.details');
 
 Route::middleware(['auth','admin'])->group(function() {
     Route::get('/dashboard', [FrontendController::class, 'index']); 
 
     //Route::resource("/products", ProductController::class);
     Route::get('products', [ProductController::class, 'index'])->name('products');      
-    Route::get('product', [ProductController::class, 'list'])->name('products.list');      
+    
     Route::get('products/add', [ProductController::class, 'add'])->name('products.add');      
     Route::post('products/add/save', [ProductController::class, 'save'])->name('products.save');
     Route::get('products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
