@@ -27,7 +27,7 @@ text-decoration: line-through;
 </style>
 <br>
 @foreach ($product as $products )
-<form action="{{ action('App\Http\Controllers\Admin\ProductController@details', $products->id) }}"  enctype="multipart/form-data" >
+<form action="{{ action('App\Http\Controllers\Admin\ProductController@details', $products->image) }}" enctype="multipart/form-data" >
 <div class=="row">
     <div class="column">
         {{ $products->name }}

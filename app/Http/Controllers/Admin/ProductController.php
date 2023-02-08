@@ -23,9 +23,9 @@ class ProductController extends Controller
         $product = Product::all();
         return view('products-list')->with('product', $product);
     }
-    public function details($id){
-        $product = DB::select('SELECT * from products where id=?', [$id]);
-        return view('products-details', ['product'=>$product], ['id'=>$id]);
+    public function details($image){
+        $product = DB::select('SELECT * from products where image=?', [$image]);
+        return view('products-details', ['product'=>$product], ['image'=>$image]);
     }
     public function add(Product $productModel){
         return view('admin.product.add');
