@@ -1,26 +1,34 @@
-@extends ('layouts.admin')
+@extends ('layouts.app')
 
 @section('content')
     <div class="card-header">
         <h4>Add categories</h4>
     </div>
-            <form action="{{ url('insert-categories') }}" method="POST" enctype="multipart/form-data"
-            @csrf
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                        <select class="form-select" name="category-id" aria-label="Default select example">
-                            <option value>Select a Category</option>
-                            @foreach ($category as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="">Name</label>
-                    <input type="text" class="form-control" nmae="name"
-                </div>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
-            </div>
+    <form action="{{ route("categories.save") }}" method="post" enctype="multipart/form-data">
+        @csrf
+
+        
+        Name: <input type="text" name="name" value="">
+        
+        <br>
+        description: <input type="text" name="description" value="">
+        <br>
+        slug: <input type="text" name="slug" value="">
+        <br>
+        status:
+        <select name="status">
+            <option value="null"></option>
+            <option value="0">out of stock</option>
+            <option value="1">in stock</option>
+        </select>
+        <br>
+            
+            Select image to upload:
+            <input class="form-control" type="file" name="image" id="image">
+
+        <br>
+        
+    
+        <button type="submit">Submit</button>
+    </form>
 @endsection

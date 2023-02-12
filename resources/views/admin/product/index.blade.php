@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ url('/products/add') }}" class="btn btn-success btn-sm" title="Add New Contact">
+<a href="{{ url('/products/add') }}" class="btn btn-success btn-sm" title="Add New Product">
     <i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
     <table class="table table-bordered table-striped">
         <thead>
