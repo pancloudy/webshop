@@ -58,9 +58,20 @@ class CategoryController extends Controller
         return view('admin.category.edit', ['category'=>$category], ['id'=>$id]);
     }
     public function update(Request $request, $id){
-        $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
-        $request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
+
+
+        if($request->image != NULL){
+           
+    
+            $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+    
+            $request->image->extension();
+    
+            $request->image->move(public_path('images'), $newImageName);
+    
+            }else{
+                $newImageName=NULL;
+            }
 
         $name=$request->get('name');
         $description=$request->get('description');

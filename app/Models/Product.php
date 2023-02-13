@@ -19,6 +19,6 @@ class Product extends Model
         'selling_price',
         'image',
         'quantity',
-        'status',
+        'status'
     ];
 }
