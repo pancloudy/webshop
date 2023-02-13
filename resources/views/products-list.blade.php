@@ -2,74 +2,33 @@
 
 @section('content')
 <style>
-    .column{
-    float: left;
-    width: 20%;
-    padding: 5px;
-    margin: 5px;
-  border: 1px solid #ccc;
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      width: 40%;
     }
-    .row{
-        padding: 3px;
+    
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
-    .row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
- .pricegreen{
-color:greenyellow;
- }
- .pricered{
-color: red;
-text-decoration: line-through;
- }
-</style>
-<br>
-@foreach ($product as $products )
-<form action="{{ action('App\Http\Controllers\Admin\ProductController@details', $products->image) }}" enctype="multipart/form-data" >
-<div class=="row">
-    <div class="column">
-        {{ $products->name }}
-        <img src="{{ asset('images/' . $products->image) }}" height="600" width="400"  />
-        @if ($products->original_price != $products->selling_price)
-            <div class="pricegreen">
-                {{ $products->selling_price}}
-            </div>
-            <div class="pricered">{{ $products->original_price }}</div>
-        @else
-        {{ $products->selling_price }}
-        @endif
-        <button type="submit">Megtekintés</button>
+    
+    .container {
+      padding: 2px 16px;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <h2>Card</h2>
+    
+    <div class="card">
+      <img src="img_avatar.png" alt="Avatar" style="width:100%">
+      <div class="container">
+        <h4><b>John Doe</b></h4> 
+        <p>Architect & Engineer</p> 
+      </div>
     </div>
+    
+    </body>
 
-</div>
-</form>
-@endforeach
-<!--<?php
-$i = 0;
-?>
-<table>
-    @foreach ($product as $products )
-    
-        @if ($i = 4)
-            <br>
-            <?php
-            $i = 0;
-            ?>
-        @endif
-    
-    <th>
-        <th>
-            {{ $products->name }}
-            <?php
-            $i = $i + 1; 
-            ?>
-        </th>
-        <td>
-            <img src="{{ asset('images/' . $products->image) }}" height="50" width = "50" class="img img-responsive" />
-        </td>
-    </th>
-    @endforeach
-</table>-->
 @endsection
