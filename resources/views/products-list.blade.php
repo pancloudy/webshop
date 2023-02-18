@@ -35,7 +35,8 @@ text-decoration: line-through;
     </style>
     <body>
     @foreach ($product as $products )
-    <form action="{{ action('App\Http\Controllers\Admin\ProductController@details', $products->image) }}" enctype="multipart/form-data" >
+    <form action="{{ action('App\Http\Controllers\Admin\ProductController@details', $products->image) }}" method="post" enctype="multipart/form-data" >
+      @csrf
     <div class="card">
         <img src="{{ asset('images/' . $products->image) }}" style="height:200px"  />
       <div class="container">
