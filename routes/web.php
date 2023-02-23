@@ -29,6 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('product', [ProductController::class, 'list'])->name('products.list');
 Route::post('product/{image}', [ProductController::class, 'details'])->name('products.details');
 Route::get('cart', [CartController::class, 'index'])->name('cart');
+Route::get('cart/save', [CartController::class, 'save'])->name('cart.save');
 
 Route::middleware(['auth','admin'])->group(function() {
     Route::get('/dashboard', [FrontendController::class, 'index']); 

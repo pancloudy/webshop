@@ -34,30 +34,40 @@
             
             <img src="{{ asset('images/' . $products->image) }}" height="500" width="500" class="img img-responsive" />
                 <form method="post">
-                    <input type="number" name="quant" value="1" max="{{ $products->quantity }}"></input>
-                    <input type="hidden" name="id" value="{{ $products->id }}"></input>
+                    <input type="number" name="quantity" value="1" max="{{ $products->quantity }}"></input>
+                    <input type="hidden" name="product_id" value="{{ $products->id }}"></input>
                     <button type="submit"  name="add">Kosárba</button>
                     @csrf
                 </form>
                 
             
                 
-                <?php
-                function cookie_btn(){
-                    
-                    echo ("Product added");
-                    if (!isset ($product_details[0] ) ) {
-                        
-                      setcookie ("product_details[0]", $_POST['id']);
-                    }else{
-                        echo "Product already in cart";
-                    }
-                    setcookie("product_details[1]", $_POST['quant']);
-                 }
-            
-            if(isset($_POST['add'])){
+    <?php
+        if(isset($_POST['add'])){
+                                
+            if (isset($_POST['p_id'], $_POST['p_quantity'])) {
                 
-                cookie_btn();
+                $p_id = (int)$_POST['p_id'];
+                $p_quantity = (int)$_POST['p_quantity'];
+                $stmt = $pdo->prepare('SELECT * FROM products WHERE id = ?');
+                $stmt->execute([$_POST['p_id']]);
+                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if ($product && $p_quantity > 0) {
+                    
+                    if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+                        if (array_key_exists($p_id, $_SESSION['cart'])) {
+                            $_SESSION['cart'][$p_id] += $quantity;
+                        } else {
+                            $_SESSION['cart'][$p_id] = $quantity;
+                        }
+                    } else {
+                        
+                        $_SESSION['cart'] = array($p_id => $p_quantity);
+                    }
+                }
+                exit;
+                 }   
             }
             ?>
         @endforeach
