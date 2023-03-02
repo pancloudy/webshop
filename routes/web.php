@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FrontendController;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('product', [ProductController::class, 'list'])->name('products.list');
-Route::get('product/{image}', [ProductController::class, 'details'])->name('products.details');
+Route::post('product/{image}', [ProductController::class, 'details'])->name('products.details');
+Route::get('cart', [CartController::class, 'index'])->name('cart');
+Route::get('cart/save', [CartController::class, 'save'])->name('cart.save');
 
 Route::middleware(['auth','admin'])->group(function() {
     Route::get('/dashboard', [FrontendController::class, 'index']); 
