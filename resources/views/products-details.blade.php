@@ -34,9 +34,11 @@
             
             <img src="{{ asset('images/' . $products->image) }}" height="500" width="500" class="img img-responsive" />
                 <form action="{{ action('App\Http\Controllers\Admin\CartController@add') }}" method="post" enctype="multipart/form-data" >
-                    <input type="number" name="prod_quantity" value="1" max="{{ $products->quantity }}"></input>
+                    <br>
+                    <input type="number" name="prod_quant" value="1"></input>
+                    <br>
                     <input type="hidden" name="prod_id" value="{{ $products->id }}"></input>
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"><input>
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"></input>
                         <button type="submit"  name="add">Kosárba</button>
                     @csrf
                 </form>
