@@ -14,7 +14,6 @@ class CartController extends Controller
     public function index(){
         $id = Auth::user()->id;
         $cart = DB::select('SELECT * from cart where user_id=? AND status=1', [$id]);
-        
         return view('cart')->with('carts', $cart);
     }
     public function add(Request $request){
