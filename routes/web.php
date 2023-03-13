@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FrontendController;
+use App\Http\Controllers\Admin\OrdersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +27,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 Route::get('product', [ProductController::class, 'list'])->name('products.list');
 Route::post('product/{image}', [ProductController::class, 'details'])->name('products.details');
+
+
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::post('cart/', [CartController::class, 'add'])->name('cart.add');
 Route::get('cart/save', [CartController::class, 'save'])->name('cart.save');
+Route::delete('cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+
+Route::get('order', [OrdersController::class, 'index'])->name('cart');
 
 Route::middleware(['auth','admin'])->group(function() {
     Route::get('/dashboard', [FrontendController::class, 'index']); 
