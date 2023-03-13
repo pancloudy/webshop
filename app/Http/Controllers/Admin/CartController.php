@@ -20,10 +20,10 @@ class CartController extends Controller
         $prod_id = $request->input('prod_id');
         $user_id = $request->input('user_id');
         $prod_quant = $request->input('prod_quant');
-        $check = DB::select('SELECT prod_id from cart where user_id=? AND status=1', [$user_id]);
+        $check = DB::select('SELECT prod_id from cart where user_id=? AND prod_id=? AND status=1', [$user_id, $prod_id]);
         
-        if ($check = $prod_id){
-            //$quantity = DB::select('SELECT MAX(prod_quantities) AS quant from cart where user_id=? AND prod_id=? AND status=1', [$user_id, $prod_id])->pluck('prod_quantities');
+        if($check != NULL){
+            
             $amount = DB::table('cart')->where('user_id', $user_id)->where('prod_id', $prod_id)->where('status', 1)->value('prod_quantities');
             
             $intamount = intval($amount);
@@ -41,6 +41,11 @@ class CartController extends Controller
             echo '<script>alert("Product added to cart.")</script>';
         }
 
-        
+     return redirect('cart');   
+    }
+    public function delete($id){
+
+        $cart = DB::delete('DELETE from cart where id=?', [$id]);
+        return redirect('cart');
     }
 }
