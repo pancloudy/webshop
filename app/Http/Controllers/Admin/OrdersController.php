@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
-use app\Models\Category;
-use app\Models\Orders;
+
+use App\Models\Orders;
+
 use Illuminate\Http\Request;
-use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,8 +45,8 @@ class OrdersController extends Controller
         echo '<script>alert("Megrendelve.")</script>';
     
     }
-    public function edit(){
-        
+    public function new(){
+        return view('order');
     }
     public function index(){
         /*

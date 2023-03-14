@@ -52,7 +52,8 @@
             
         </tbody>
     </table>
-    <form action="{{ route('order') }}" method="post">
+    <form action="{{ route('order.new') }}">
+        <button type="submit">Submit</button>
     </form>
     </html>
 @endsection
