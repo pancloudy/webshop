@@ -20,6 +20,7 @@ class Orders extends Model
         'city',
         'address',
         'phone',
-        'status'
+        'status',
+        'price'
     ];
 }

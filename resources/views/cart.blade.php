@@ -52,7 +52,9 @@
             
         </tbody>
     </table>
-    <form action="{{ route('order.new') }}">
+    
+    <form action="{{ route('order.new', $osszprice) }}">
+        <input type="hidden" name="price" value="{{ $osszprice }}"></input>
         <button type="submit">Submit</button>
     </form>
     </html>

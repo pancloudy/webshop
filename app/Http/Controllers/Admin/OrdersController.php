@@ -15,21 +15,30 @@ class OrdersController extends Controller
     public function save(Request $request){
         $uid = Auth::user()->id;
         $prod_ids = "";
-        $incart = DB::select('SELECT prod_id from cart where user_id=? AND status=1', [$uid]);
+        $ertek = "";
+        $incart = DB::select('SELECT prod_id, prod_quantities from cart where user_id=? AND status=1', [$uid]);
+        $prices = DB::select('SELECT prod_id from cart where user_id=? AND status=1', [$uid]);
         foreach ($incart as $value){
-            $prod_ids=$prod_ids."|".$value->prod_id;
+            if($value->prod_quantities>1){
+                for($i = 0; $i < $value->prod_quantities; $i++){
+                $prod_ids=$prod_ids."|".$value->prod_id;
+                }
+            }else{
+                $prod_ids=$prod_ids."|".$value->prod_id;
+            }
+            
         }
-        
 
 
         $cart = DB::select('SELECT * from cart where user_id=? AND status=1', [$uid]);
         $surname = $request->input('surname');
         $forename = $request->input('forename');
         $country = $request->input('country');
-        $zip = $request->input('country');
-        $city = $request->input('country');
-        $address = $request->input('address1').$request->input('address2');
+        $zip = $request->input('zip');
+        $city = $request->input('city');
+        $address = $request->input('address1')." ".$request->input('address2');
         $phone = $request->input('phone');
+        $price = $request->input('price');
         $order = Orders::create([
             'prod_id' => $prod_ids,
             'user_id' => $uid,
@@ -40,13 +49,17 @@ class OrdersController extends Controller
             'city' => $city,
             'address' => $address,
             'phone' => $phone,
-            'status' => "0"
+            'status' => "0",
+            'price' => $price
         ]);
+        $cart = DB::update('UPDATE cart SET status=2 where user_id=? AND status=1', [$uid]);
+ 
         echo '<script>alert("Megrendelve.")</script>';
     
     }
-    public function new(){
-        return view('order');
+    public function new(Request $request){
+        $price = $request->input('price');
+        return view('order')->with('price', $price);
     }
     public function index(){
         /*
@@ -55,9 +68,7 @@ class OrdersController extends Controller
         Kiszállítás alatt
         Feldolgozva
         */
-        $orders0 = DB::select('SELECT * from orders WHERE status=0');
-        $orders2 = DB::select('SELECT * from orders WHERE status=1');
-        $orders3 = DB::select('SELECT * from orders WHERE status=2');
-
+        
+        return view('admin.orders.index');
     }
 }
