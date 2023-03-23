@@ -38,8 +38,8 @@ Route::post('cart/', [CartController::class, 'add'])->name('cart.add');
 Route::get('cart/save', [CartController::class, 'save'])->name('cart.save');
 Route::delete('cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
-Route::get('order', [OrdersController::class, 'new'])->name('order.new');
-Route::post('order/', [OrdersController::class, 'save'])->name('order.save');
+Route::post('order/save', [OrdersController::class, 'save'])->name('order.save');
+Route::get('order/new', [OrdersController::class, 'new'])->name('order');
 
 Route::middleware(['auth','admin'])->group(function() {
     Route::get('/dashboard', [FrontendController::class, 'index']); 

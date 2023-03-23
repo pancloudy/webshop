@@ -71,4 +71,7 @@ class OrdersController extends Controller
         
         return view('admin.orders.index');
     }
+    public function status($id, $status){
+
+    }
 }
