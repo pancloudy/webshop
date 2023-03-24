@@ -71,7 +71,10 @@ class OrdersController extends Controller
         
         return view('admin.orders.index');
     }
-    public function status($id, $status){
-
+    public function status(Request $request){
+        $status = $request->input('status');
+        $id = $request->input('id');
+        $change = DB::update('UPDATE orders set status = ? where id = ?', [$status, $id]);
+        return view('admin.orders.index');
     }
 }

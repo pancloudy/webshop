@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use app\Models\Cart;
 use App\Models\Carts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

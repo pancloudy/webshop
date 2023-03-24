@@ -23,7 +23,7 @@
         <br>
         Telefonszám: <input type="text" name="phone" value="">
         <br>
-        <input type="hidden" name="price" value=" {{ $price}}">
+        <input type="hidden" name="price" value="{{ $price }}">
         <button type="submit">Submit</button>
     </form>
 @endsection

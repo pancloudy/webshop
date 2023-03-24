@@ -39,7 +39,7 @@ Route::get('cart/save', [CartController::class, 'save'])->name('cart.save');
 Route::delete('cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
 Route::post('order/save', [OrdersController::class, 'save'])->name('order.save');
-Route::get('order/new', [OrdersController::class, 'new'])->name('order');
+Route::get('order/new', [OrdersController::class, 'new'])->name('order.new');
 
 Route::middleware(['auth','admin'])->group(function() {
     Route::get('/dashboard', [FrontendController::class, 'index']); 
@@ -61,6 +61,7 @@ Route::middleware(['auth','admin'])->group(function() {
     Route::put('categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
 
-
+   
     Route::get('orders', [OrdersController::class, 'index'])->name('orders');
+    Route::post('orders/status', [OrdersController::class, 'status'])->name('orders.status');
 });
