@@ -6,8 +6,10 @@
 </style>
 <html>
     <div class="topbar">
-        <form>
+        <form action="{{ route('search') }}">
             <input type="text" name="search">
+            <button type="submit"></button>
         </form>
     </div>
+    <br>
 </html>

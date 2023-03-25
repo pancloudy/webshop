@@ -20,14 +20,14 @@ use App\Http\Controllers\Admin\ProductController;
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('home');
 })->name('app');
 //Route::get('/main', 'App\Http\Controllers\Controller@main')->name('app');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('search', [App\http\Controllers\HomeController::class, 'search'])->name('search');
 
 Route::get('product', [ProductController::class, 'list'])->name('products.list');
 Route::post('product/{image}', [ProductController::class, 'details'])->name('products.details');
