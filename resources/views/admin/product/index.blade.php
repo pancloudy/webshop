@@ -1,3 +1,4 @@
+@extends('layouts.front')
 @extends('layouts.app')
 
 @section('content')
@@ -46,8 +47,7 @@
                     {{ $products->status ?? false}}
                 </td>
                 <td>
-                    {{ $id =$products->id }}
-                    <form action="{{ route('products.edit', $id) }}"  class="btn btn-primary">
+                    <form action="{{ route('products.edit', $products->id) }}"  class="btn btn-primary">
                     @csrf
                     
                     <button type="submit">Edit</button>
