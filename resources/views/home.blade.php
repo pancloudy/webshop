@@ -1,59 +1,48 @@
-@extends('layouts.front')
-@extends('layouts.app')
+
 @extends('layouts.topbar')
+
+
 @section('content')
+<html>
 <style>
-.sidenav {
-    height: 100%;
-    width: 160px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
-  
-  .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-  }
-  
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-  .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
+.jumbotron {
+      background-image: url("https://images.pexels.com/photos/65718/pexels-photo-65718.jpeg");
+      background-size: cover;
+      height: 600px;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .jumbotron h1 {
+      font-size: 60px;
+      font-weight: bold;
+      margin-bottom: 0;
+      text-shadow:
+        0.02em 0 black,
+        0 0.02em black,
+        -0.02em 0 black,
+        0 -0.02em black;
+      color:#308a44;
+    }
 </style>
-
+<body>
+<div class="jumbotron">
+    <h1>Köszöntjük az oldalunkon!</h1>
+  </div>
 <div class="main">
-
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                
                 <a href="{{ url('dashboard') }}">
                     <p>dashboard</p>
                 </a>
-                <div class="card-body">
+                
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
+                
 </div>
-
+</body>
+</html>
 @endsection

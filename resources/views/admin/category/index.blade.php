@@ -1,5 +1,4 @@
-@extends('layouts.front')
-@extends('layouts.app')
+@extends('layouts.topbar')
 
 @section('content')
 <a href="{{ url('/categories/add') }}" class="btn btn-success btn-sm" title="Add New Category">

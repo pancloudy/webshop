@@ -1,5 +1,6 @@
-@extends('layouts.front')
 @extends('layouts.app')
+@extends('layouts.front')
+@extends('layouts.topbar')
 
 @section('content')
 <style>

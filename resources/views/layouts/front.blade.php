@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Webshop') }}</title>
+    <title>{{ config('app.name', 'Hangszer Webshop') }}</title>
     <style>
         <link href="{{ asset('frontend/bootstrap5.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend/custom.css') }}" rel="stylesheet">

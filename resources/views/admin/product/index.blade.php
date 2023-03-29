@@ -1,5 +1,6 @@
 @extends('layouts.front')
 @extends('layouts.app')
+@extends('layouts.topbar')
 
 @section('content')
 <a href="{{ url('/products/add') }}" class="btn btn-success btn-sm" title="Add New Product">

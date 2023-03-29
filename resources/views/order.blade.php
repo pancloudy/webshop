@@ -1,5 +1,4 @@
-@extends('layouts.front')
-@extends ('layouts.app')
+@extends ('layouts.topbar')
 
 @section('content')
     <div class="card-header">

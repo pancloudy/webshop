@@ -1,6 +1,4 @@
-@extends('layouts.front')
-@extends('layouts.app')
-
+@extends('layouts.topbar')
 @section('content')
 <html>
     <?php 
