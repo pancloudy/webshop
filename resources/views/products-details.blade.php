@@ -2,7 +2,7 @@
 @section('content')
 
             
-            <html>
+<html>
     
     <table class="table table-bordered table-striped">
         

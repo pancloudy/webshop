@@ -23,11 +23,11 @@ class ProductController extends Controller
         $product = Product::all();
         return view('products-list')->with('product', $product);
     }
-    public function details($image){
+    public function details($slug, $image){
         $product = DB::select('SELECT * from products where image=?', [$image]);
-        return view('products-details', ['product'=>$product], ['image'=>$image]);
+        return view('products-details', ['slug'=>$slug], ['product'=>$product], ['image'=>$image]);;
     }
-    public function add(Product $productModel){
+    public function add(){
         return view('admin.product.add');
     }
     public function save(Request $request){
