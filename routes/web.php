@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Middleware\SuperAdmin;
+use App\Http\Controllers\SuperAdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +44,7 @@ Route::delete('cart/delete/{id}', [CartController::class, 'delete'])->name('cart
 Route::post('order/save', [OrdersController::class, 'save'])->name('order.save');
 Route::get('order/new', [OrdersController::class, 'new'])->name('order.new');
 
+
 Route::middleware(['auth','admin'])->group(function() {
     Route::get('/dashboard', [FrontendController::class, 'index']); 
 
@@ -65,3 +69,5 @@ Route::middleware(['auth','admin'])->group(function() {
     Route::get('orders', [OrdersController::class, 'index'])->name('orders');
     Route::post('orders/status', [OrdersController::class, 'status'])->name('orders.status');
 });
+
+Route::get('users', [SuperAdminController::class, 'index'])->name('superadmin');

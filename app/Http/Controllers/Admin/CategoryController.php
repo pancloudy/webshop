@@ -61,7 +61,9 @@ class CategoryController extends Controller
 
 
         if($request->image != NULL){
-           
+            $request->validate([
+                'image' => 'required|mimes:png,jpg,jpeg|max:5048'
+            ]);
     
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
     
