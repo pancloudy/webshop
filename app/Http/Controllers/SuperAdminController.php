@@ -17,4 +17,20 @@ class SuperAdminController extends Controller
         }
         
     }
+    public function search($name){
+        if (Auth::user()->role == '2') {
+            
+           }
+           else{
+            return redirect('/home')->with('status','Access denied');
+        }
+    }
+    public function role($id){
+        if (Auth::user()->role == '2') {
+            
+           }
+           else{
+            return redirect('/home')->with('status','Access denied');
+        }
+    }
 }

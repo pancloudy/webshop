@@ -71,3 +71,5 @@ Route::middleware(['auth','admin'])->group(function() {
 });
 
 Route::get('users', [SuperAdminController::class, 'index'])->name('superadmin');
+Route::post('users/search', [SuperAdminController::class, 'search'])->name('users.search');
+Route::post('users/role', [SuperAdminController::class, 'role'])->name('users.role');

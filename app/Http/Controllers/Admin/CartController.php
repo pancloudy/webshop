@@ -27,7 +27,7 @@ class CartController extends Controller
             
             $intamount = intval($amount);
             $quantity = $intamount+$prod_quant;
-            $update = DB::update('UPDATE cart set prod_quantities=? WHERE prod_id=?',[$quantity, $prod_id]);
+            DB::update('UPDATE cart set prod_quantities=? WHERE prod_id=?',[$quantity, $prod_id]);
         }
         else{    
         
