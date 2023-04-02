@@ -1,15 +1,12 @@
-@extends('layouts.app')
-@extends('layouts.front')
 @extends('layouts.topbar')
 
 @section('content')
 <style>
-    .table{
-        float: left;
-    }
+    
 </style>
 <html>
-    
+    <div class="row">
+    <div class="col-md-">
     <table class="table table-bordered table-striped">
         
             <tr>
@@ -56,7 +53,9 @@
                 @endforeach
         
             
-    </table> 
+    </table>
+</div>
+<div class="col-md-4"> 
     <table class="table table-bordered table-striped">
         
             <tr>
@@ -104,6 +103,8 @@
         
             
     </table>
+</div>
+<div class="col-md-4">
     <table class="table table-bordered table-striped">
         
             <tr>
@@ -151,5 +152,7 @@
         
             
     </table>
+</div>
+</div>
 </html>
 @endsection
