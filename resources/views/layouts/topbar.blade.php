@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Hangszer Webshop</title>
-  <!-- Bootstrap CSS -->
+  <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-  <!-- Custom CSS -->
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
+      color: #000000;
+      background-color: #ffffff;
       margin: 0px;
     }
     .navbar {
@@ -19,17 +19,20 @@
       margin: 0px;
     }
     .navbar-brand {
+      margin-left: 10px;
       color: #fff;
       font-weight: bold;
     }
     .navbar-nav .nav-link {
       color: #fff;
-      size: 5px;
+      font-size: 20px;
+    }
+    .navbar-nav > li{
+    
     }
     .nav-item{
       padding-right: 100px;
     }
-    
     .btn {
       background-color: #58b86d;
       color: #000000;
@@ -39,32 +42,45 @@
       background-color: #23272b;
       color: #fff;
     }
+    td{
+      color:#000000;
+    }
   </style>
 
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand" href="#">Hangszer Webshop</a>
+      <a class="navbar-brand" href="{{ route('home') }}"> Hangszer Webshop</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Termékek</a>
+            <a class="nav-link" href="{{ url('product') }}">Termékek</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Rólunk</a>
           </li>
+          
           <li class="nav-item">
-            <a class="nav-link" href="#">Kosár</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"><form action="{{ route('search') }}">
+            <a class="nav-link">
+            <form action="{{ route('search') }}">
                 <input type="text" name="search">
                 <button type="submit" class="btn btn-primary">Keresés</button>
             </form>
             </a>
           </li>
+        
+          <li class="nav-item">
+            @if (Auth::user()->role == '1')
+              <a class="nav-link" href="{{ url('dashboard') }}">Dashboard</a>
+            @endif
+            @if (Auth::user()->role == '2')
+              <a class="nav-link" href="{{ route('users.index') }}">Super admin</a>
+            @endif
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('cart') }}">Kosár</a>
+          </li>
                 @guest
                     @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <li class="nav-item" >
+                            <a class="nav-link" href=""{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
                     @if (Route::has('register'))
@@ -73,20 +89,20 @@
                         </li>
                     @endif
                     @else
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                             {{ Auth::user()->name }}
                         </a>
-                            <div class="dropdown-menu dropdown-menu-dark">
+                            <ul class="dropdown-menu dropdown-menu-dark">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                      onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                                      {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                              </div>
+                              </ul>
                             
                 @endguest
                   </ul>

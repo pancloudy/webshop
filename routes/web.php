@@ -70,6 +70,6 @@ Route::middleware(['auth','admin'])->group(function() {
     Route::post('orders/status', [OrdersController::class, 'status'])->name('orders.status');
 });
 
-Route::get('users', [SuperAdminController::class, 'index'])->name('superadmin');
-Route::post('users/search', [SuperAdminController::class, 'search'])->name('users.search');
-Route::post('users/role', [SuperAdminController::class, 'role'])->name('users.role');
+Route::get('users', [SuperAdminController::class, 'index'])->name('users.index');
+Route::post('users', [SuperAdminController::class, 'search'])->name('users.search');
+Route::post('users', [SuperAdminController::class, 'role'])->name('users.role');

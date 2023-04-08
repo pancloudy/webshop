@@ -1,27 +1,37 @@
-@extends('layouts.front')
-@extends('layouts.app')
 @extends('layouts.topbar')
 
 @section('content')
-<a href="{{ url('/products/add') }}" class="btn btn-success btn-sm" title="Add New Product">
-    <i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
+<a href="{{ url('/products/add') }}" class="btn btn-success btn-sm" title="Új">
+    <i class="fa fa-plus" aria-hidden="true"></i>Új termék</a>
     <table class="table table-bordered table-striped">
-        <thead>
+        
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Small Description</th>
-                <th>Description</th>
-                <th>Original Price</th>
-                <th>Selling Price</th>
-                <th>Image</th>
-                <th>Quantity</th>
-                <th>Status</th>
+                <th>ID</th>
+                <th>Kategória ID</th>
+                <th>Kategória</th>
+                <th>Név</th>
+                <th>Rövid leírás</th>
+                <th>Leírás</th>
+                <th>Eredeti ár</th>
+                <th>Akciós ár</th>
+                <th>Kép</th>
+                <th>Mennyiség</th>
+                <th>Elérhetőség</th>
+                <th>Műveletek</th>
             </tr>
             @foreach ($product as $products)
             <tr>
                 <td>
                     {{ $products->id ?? false }}
+                </td>
+                <td>
+                    {{ $products->category_id ?? false}}
+                </td>
+                <td>
+                    <?php
+                    $category_name = DB::table('categories')->where('id', $products->category_id)->value('name');
+                    ?>
+                    {{ $category_name ?? false }}
                 </td>
                 <td>
                     {{ $products->name ?? false}}
@@ -51,20 +61,17 @@
                     <form action="{{ route('products.edit', $products->id) }}"  class="btn btn-primary">
                     @csrf
                     
-                    <button type="submit">Edit</button>
+                    <button class="btn btn-primary" type="submit">Szerkesztés</button>
                     </form>
                     <form action="{{ route('products.delete', $products->id) }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Delete</button>
+                        <button class="btn btn-primary" type="submit">Törlés</button>
                     </form>
                     
                 </td>
             </tr>
         @endforeach
-        </thead>
-        <tbody>
-            
-        </tbody>
+    
     </table>
 @endsection

@@ -52,7 +52,7 @@ text-decoration: line-through;
         @else
         <h4>{{ $products->selling_price }}</h4>
         @endif</p> 
-        <button type="submit">Megtekintés</button>
+        <button class="btn btn-primary" type="submit">Megtekintés</button>
       </div>
     </div>
 </form>

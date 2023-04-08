@@ -1,30 +1,36 @@
 @extends('layouts.topbar')
 @section('content')
+<style>
+
+</style>
 <html>
     <?php 
     $osszprice = 0;
     $seged = 0;
     ?>
-
+    
     <table class="table table-bordered table-striped">
+        <div class="col-md-2">
         @foreach ($carts as $cart)
         <?php
         $product = DB::select('SELECT * from products where id=?', [$cart->prod_id]);
         ?>
         @foreach ($product as $products)
-        <thead>
-            <tr>
-                <th><td> {{ $products->name ?? false }}</td></th>
-            </tr>
-            <tr>
+        
+                <th>Termék neve:</th>
+
+                <td> {{ $products->name ?? false }}</td>
+            
+        
+            
                 <th>Darabszám:  <td>{{ $cart->prod_quantities ?? false}}</td></th>
-            </tr>
-            <tr> <th>
+           
+             <th>
                 <img src="{{ asset('images/' . $products->image) }}" style="height:200px"  /></th>
-            </tr>
-            <tr>
+            
+            
                 <th>Ár:  <td>{{ $products->selling_price ?? false}}</td></th>
-            </tr>
+            
             <?php 
             if($cart->prod_quantities > 1){
                 $seged = $cart->prod_quantities * $products->selling_price;
@@ -35,26 +41,26 @@
             
             }
             ?>
-            <tr><th>
+            <th>
             <form action="{{ route('cart.delete', $cart->id) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="submit">Delete</button>
-            </form></th></tr>
+                <button class="btn btn-primary" type="submit">Törlés</button>
+            </form></th>
+            <tr></tr>
         @endforeach
         @endforeach
         <tr>
             <th>Fizetendő összeg: <td>{{ $osszprice }}</td></th>
         </tr>
-        </thead>
-        <tbody>
-            
-        </tbody>
-    </table>
+       
     
+
+    </table>
+    </div
     <form action="{{ route('order.new') }}" method="get">
         <input type="hidden" name="price" value="{{ $osszprice }}"></input>
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Rendeléshez</button>
     </form>
     </html>
 @endsection

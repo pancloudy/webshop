@@ -24,6 +24,6 @@
         Telefonszám: <input type="text" name="phone" value="">
         <br>
         <input type="hidden" name="price" value="{{ $price }}">
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Megrendelés</button>
     </form>
 @endsection

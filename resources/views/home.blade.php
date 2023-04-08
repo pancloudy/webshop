@@ -32,15 +32,16 @@
     <h1>Köszöntjük az oldalunkon!</h1>
   </div>
 <div class="main">
-                <a href="{{ url('dashboard') }}">
-                    <p>dashboard</p>
-                </a>
+
                 
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
+                <?php
+                $product = DB::select('SELECT * from products'); 
+                ?>
                 
 </div>
 </body>

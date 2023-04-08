@@ -38,7 +38,7 @@
                     <br>
                     <input type="hidden" name="prod_id" value="{{ $products->id }}"></input>
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"></input>
-                        <button type="submit"  name="add">Kosárba</button>
+                        <button type="submit" class="btn btn-primary" name="add">Kosárba</button>
                     @csrf
                 </form>
                 
