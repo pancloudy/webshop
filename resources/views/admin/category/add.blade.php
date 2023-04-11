@@ -6,10 +6,7 @@
     </div>
     <form action="{{ route("categories.save") }}" method="post" enctype="multipart/form-data">
         @csrf
-
-        
         Név: <input type="text" name="name" value="">
-        
         <br>
         Leírás: <input type="text" name="description" value="">
         <br>

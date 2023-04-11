@@ -6,19 +6,15 @@
 </style>
 <html>
     <div class="row">
-    <div class="col-md-">
+    <div class="col-md-4">
     <table class="table table-bordered table-striped">
-        
             <tr>
                 <th>Új</th>
             </tr>
-        
             <?php 
         $orders1 = DB::select('SELECT * from orders WHERE status=0');
             ?>
-            
                 @foreach ($orders1 as $order1 )
-            
             <tr>
                 <td>
                     {{ $order1->id ?? false}}
@@ -32,9 +28,7 @@
                 @for ($i = 1; $i<count($exp); $i=$i+1 )
                 <?php 
                 $element = $exp[$i];
-                
                 $name = DB::table('products')->where('id', $element)->value('name');
-            
                 ?>
                 {{ $element }} {{ $name }}
                 <br>
@@ -48,11 +42,9 @@
                         <option value="2">Lezárt</option>
                     </select>  
                 </form>
-                                
+            </td>             
         </tr>
-                @endforeach
-        
-            
+                @endforeach 
     </table>
 </div>
 <div class="col-md-4"> 
@@ -97,7 +89,7 @@
                         <option value="2">Lezárt</option>
                     </select>  
                 </form>
-                                   
+            </td>                
         </tr>
                 @endforeach
         
@@ -146,7 +138,7 @@
                         <option value="1">Folyamatban</option>
                     </select>  
                 </form>
-                              
+            </td>           
         </tr>
                 @endforeach
         
