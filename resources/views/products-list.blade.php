@@ -35,10 +35,9 @@ text-decoration: line-through;
     <body>
     @foreach ($product as $products )
     <?php 
-    
     $slug = DB::table('categories')->where('id', $products->category_id)->value('slug');
     ?>
-    <form action="{{ route('products.details', ['slug' => $slug, 'image' => $products->image]) }}" method="post" enctype="multipart/form-data">
+  <form action="{{ route('products.details', ['slug' => $slug, 'image' => $products->image]) }}" method="post" enctype="multipart/form-data">
       @csrf
     <div class="card">
         <img src="{{ asset('images/' . $products->image) }}" style="height:200px"  />
@@ -55,7 +54,7 @@ text-decoration: line-through;
         <button class="btn btn-primary" type="submit">Megtekintés</button>
       </div>
     </div>
-</form>
+  </form>
     @endforeach
     </body>
 

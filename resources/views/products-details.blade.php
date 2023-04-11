@@ -1,19 +1,33 @@
 @extends('layouts.topbar')
 @section('content')
 
-            
-<html>
+<style>
+    img{
+      float: right;  
+    }
+    .container{
+        display: grid;
+ align-items: center; 
+ grid-template-columns: 1fr 1fr 1fr;
+ column-gap: 5px;
+    }
+    .after{
+        padding-left: 20px;
+    }
+</style>
+
+    @foreach ($product as $products)
     
-    <table class="table table-bordered table-striped">
+                
+    <div class="container">
         
-        @foreach ($product as $products)
-        <thead>
-            
+    <table class="table table-bordered table-striped">  
+
             <tr>
-                <th>Name:  <td>{{ $products->name ?? false}}</td></th>
+                <th>Név:  <td>{{ $products->name ?? false}}</td></th>
             </tr>
             <tr>
-                <th>Small Description <td>{{ $products->small_description ?? false}}</td></th>
+                <th>Rövid leírás <td>{{ $products->small_description ?? false}}</td></th>
             </tr>
             <tr>
                 <th>Description <td>{{ $products->description ?? false}}</td></th>
@@ -30,53 +44,22 @@
             <tr>
                 <th>Status: <td>{{ $products->status ?? false}}</td></th>
             </tr>    
-            
-            <img src="{{ asset('images/' . $products->image) }}" height="500" width="500" class="img img-responsive" />
-                <form action="{{ action('App\Http\Controllers\Admin\CartController@add') }}" method="post" enctype="multipart/form-data" >
-                    <br>
-                    <input type="number" name="prod_quant" value="1"></input>
-                    <br>
-                    <input type="hidden" name="prod_id" value="{{ $products->id }}"></input>
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"></input>
-                        <button type="submit" class="btn btn-primary" name="add">Kosárba</button>
-                    @csrf
-                </form>
-                
-            
-                
-    <?php
-        if(isset($_POST['add'])){
-                                
-            if (isset($_POST['p_id'], $_POST['p_quantity'])) {
-                
-                $p_id = (int)$_POST['p_id'];
-                $p_quantity = (int)$_POST['p_quantity'];
-                $stmt = $pdo->prepare('SELECT * FROM products WHERE id = ?');
-                $stmt->execute([$_POST['p_id']]);
-                $product = $stmt->fetch(PDO::FETCH_ASSOC);
-                
-                if ($product && $p_quantity > 0) {
-                    
-                    if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
-                        if (array_key_exists($p_id, $_SESSION['cart'])) {
-                            $_SESSION['cart'][$p_id] += $quantity;
-                        } else {
-                            $_SESSION['cart'][$p_id] = $quantity;
-                        }
-                    } else {
-                        
-                        $_SESSION['cart'] = array($p_id => $p_quantity);
-                    }
-                }
-                exit;
-                 }   
-            }
-            ?>
-        @endforeach
-        </thead>
-        <tbody>
-            
-        </tbody>
+    
     </table>
-    </html>
+    <div class="after">
+    <img src="{{ asset('images/' . $products->image) }}" height="100%" width="100%" />
+</div>
+            <br>
+            <form action="{{ action('App\Http\Controllers\Admin\CartController@add') }}" method="post" enctype="multipart/form-data" >
+                <br>
+                <input type="number" style="width:5em" name="prod_quant" value="1"></input>
+                <br>
+                <input type="hidden" name="prod_id" value="{{ $products->id }}"></input>
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"></input>
+                    <button type="submit" class="btn btn-primary" name="add">Kosárba</button>
+                @csrf
+            </form>
+        
+</div>
+    @endforeach
 @endsection
