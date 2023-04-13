@@ -67,11 +67,13 @@
           </li>
         
           <li class="nav-item">
-            @if (Auth::user()->role == '1')
-              <a class="nav-link" href="{{ url('dashboard') }}">Dashboard</a>
-            @endif
-            @if (Auth::user()->role == '2')
-              <a class="nav-link" href="{{ route('users.index') }}">Super admin</a>
+            @if (Auth::user())
+              @if (Auth::user()->role == '1')
+                <a class="nav-link" href="{{ url('dashboard') }}">Dashboard</a>
+              @endif
+              @if (Auth::user()->role == '2')
+                <a class="nav-link" href="{{ route('users.index') }}">Super admin</a>
+              @endif
             @endif
           </li>
           <li class="nav-item">
@@ -80,7 +82,7 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item" >
-                            <a class="nav-link" href=""{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
                     @if (Route::has('register'))

@@ -75,6 +75,7 @@ text-decoration: line-through;
                 ?>
               <form action="{{ route('products.details', ['slug' => $slug, 'image' => $products->image]) }}" method="post" enctype="multipart/form-data">
                   @csrf
+                  <div class="col-md-8">
                 <div class="card">
                     <img src="{{ asset('images/' . $products->image) }}" style="height:200px"  />
                   <div class="container">
@@ -89,6 +90,7 @@ text-decoration: line-through;
                     @endif</p> 
                     <button class="btn btn-primary" type="submit">Megtekintés</button>
                   </div>
+                </div>
                 </div>
               </form>
                 @endforeach
