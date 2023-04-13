@@ -12,14 +12,10 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function index(){
-        //$product = DB::table('products')->get();
-        //return view('admin.product.index', compact('product'));
         $product = Product::all();
         return view('admin.product.index')->with('product', $product);
     }
     public function list(){
-        //$product = DB::table('products')->get();
-        //return view('admin.product.index', compact('product'));
         $product = Product::all();
         return view('products-list')->with('product', $product);
     }
@@ -42,7 +38,7 @@ class ProductController extends Controller
 
         $request->image->move(public_path('images'), $newImageName);
 
-        $product = Product::create([
+        Product::create([
             'category_id' => $request->input('category_id'),
             'name' => $request->input('name'),
             'small_description' => $request->input('small_description'),
@@ -58,8 +54,6 @@ class ProductController extends Controller
         return redirect('/products/add');
     }
     public function edit($id){
-        //$products = Product::find($id);
-       
         $product = DB::select('SELECT * from products where id=?', [$id]);
         return view('admin.product.edit', ['product'=>$product], ['id'=>$id]);
     }
@@ -74,15 +68,12 @@ class ProductController extends Controller
         $description=$request->get('description');
         $original_price=$request->get('original_price');
         $selling_price=$request->get('selling_price');
-        $image=$request->get('image');
         $quantity=$request->get('quantity');
         $status=$request->get('status');
 
         $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
         original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
          $description, $original_price, $selling_price, $newImageName, $quantity, $status, $id]);
-
-
 
         if($product){
             $redirect = redirect('products')->with('success');
@@ -93,7 +84,7 @@ class ProductController extends Controller
     }
     public function delete($id){
 
-        $product = DB::delete('delete from products where id=?', [$id]);
+        DB::delete('delete from products where id=?', [$id]);
         return redirect('products');
     }
 }

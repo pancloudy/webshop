@@ -33,7 +33,7 @@
     .nav-item{
       padding-right: 100px;
     }
-    .btn {
+    .btn-primary {
       background-color: #58b86d;
       color: #000000;
       border: none;

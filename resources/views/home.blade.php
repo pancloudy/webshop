@@ -26,75 +26,61 @@
         0 -0.02em black;
       color:#308a44;
     }
-    .card {
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        float: left;
-      text-align: center;
-      transition: 0.3s;
-      margin-right: 1rem;
-  margin-bottom: 1rem;
-      
-    object-fit: cover;
+    .container{
+      display: flex;
+      flex-wrap: wrap;
+      width: 1500px;
+      justify-content: center;
+      margin: auto;
     }
-    .card:after{
-        padding: 10px;
+    .card{
+      flex: 1 0 300px;
+      margin: 5px;
+      text-align: center;
+      min-height: 50px;
     }
     .card:hover {
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
     
-    .container {
-      padding: 3px;
-      max-height: 500px;
-      float:left;
-    }
-    .pricegreen{
-color:greenyellow;
- }
- .pricered{
-color: red;
-text-decoration: line-through;
- }
 </style>
 <body>
 <div class="jumbotron">
     <h1>Köszöntjük az oldalunkon!</h1>
   </div>
-
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
                 <?php
-                $product = DB::select('SELECT * from products'); 
+                $product = DB::select('SELECT * from products');
+                $count = 0; 
                 ?>
+              <div class="container">
                 @foreach ($product as $products )
-                <?php 
-                $slug = DB::table('categories')->where('id', $products->category_id)->value('slug');
-                ?>
-              <form action="{{ route('products.details', ['slug' => $slug, 'image' => $products->image]) }}" method="post" enctype="multipart/form-data">
-                  @csrf
-                  <div class="col-md-8">
-                <div class="card">
-                    <img src="{{ asset('images/' . $products->image) }}" style="height:200px"  />
-                  <div class="container">
-                    <h4><b>{{ $products->name }}</b></h4> 
-                    <p>@if ($products->original_price != $products->selling_price)
-                        <div class="pricegreen">
-                            <h4>{{ $products->selling_price}}</h4>
-                        </div>
-                        <div class="pricered"> <h4> {{ $products->original_price }} </h4></div>
-                    @else
-                    <h4>{{ $products->selling_price }}</h4>
-                    @endif</p> 
-                    <button class="btn btn-primary" type="submit">Megtekintés</button>
+                  <?php 
+                  $slug = DB::table('categories')->where('id', $products->category_id)->value('slug');
+                  ?>
+                  <form action="{{ route('products.details', ['slug' => $slug, 'image' => $products->image]) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                  
+                  <div class="card" style="width: 18rem;">
+                    <img src="{{ asset('images/' . $products->image) }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ $products->name }}</h5>
+                      <p class="card-text">{{ $products->small_description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        @if ($products->original_price > $products->selling_price)
+                          <li class="list-group-item" style="text-decoration: line-through;">{{ $products->original_price }} ft</li>
+                          <li class="list-group-item">{{ $products->selling_price }} ft</li>
+                        @else
+                          <li class="list-group-item">{{ $products->selling_price }} ft</li>
+                        @endif
+                    </ul>
+                    <div class="card-body">
+                      <button class="btn btn-primary" type="submit">Megtekintés</button>
+                    </div>
                   </div>
-                </div>
-                </div>
-              </form>
-                @endforeach
-
+                </form>
+              @endforeach
+            </div>
 </body>
 </html>
 @endsection
