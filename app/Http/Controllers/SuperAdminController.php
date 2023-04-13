@@ -28,12 +28,12 @@ class SuperAdminController extends Controller
     }
     public function role(Request $request){
         if (Auth::user()->role == '2') {
-        $role = $request->input('role');
-        $id = $request->input('id');
-        $change = DB::update('UPDATE users set role = ? where id = ?', [$role, $id]);
-        return view('super_admin.index');
-           }
-           else{
+            $role = $request->input('role');
+            $id = $request->input('id');
+            DB::update('UPDATE users set role = ? where id = ?', [$role, $id]);
+            return view('super_admin.index');
+        }
+        else{
             return redirect('/home')->with('status','Access denied');
         }
     }

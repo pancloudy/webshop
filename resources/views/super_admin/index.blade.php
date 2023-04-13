@@ -1,34 +1,32 @@
 @extends('layouts.topbar')
 @section('content')
 
-<?php
-if(isset($_GET['search'])){
-    if(empty($_GET['search'])){
-        echo "<script>alert('Kérem írjon is be valamit a kereséshez.')</script>";
-    }
-$search=$_GET['search'];
-$users0 = DB::select("SELECT * FROM users WHERE name LIKE '%" . $search . "%' AND role = 0");
-$check=true;
 
-}
-else $check=false?>
 
     <body>
     <div class="row">
         <div class="col-md-4">
             <table class="table table-bordered table-striped">
                 <th>Felhasználók</th>
+                <?php
+                    if(isset($_GET['search'])){
+                        if(empty($_GET['search'])){
+                            echo "<script>alert('Kérem írjon is be valamit a kereséshez.')</script>";
+                        }
+                        $search=$_GET['search'];
+                        $users0 = DB::select("SELECT * FROM users WHERE name LIKE '%" . $search . "%' AND role = 0");
+                        $check=true;
+                    }
+                else $check=false?>
                 <form action="" method="GET">
                     <input type="text" name="search">
                     <input type="submit" class="btn btn-primary" value="Keresés"></input>
                 </form>
-                
                 <?php
                 if(!$check){
                   $users0 = DB::select('SELECT * from users where role = 0'); 
                 }
                 ?>
-                
                 @foreach ($users0 as $user0)
                 <tr>
                     <td>
@@ -47,7 +45,6 @@ else $check=false?>
                 </td>
                 </tr>
                 @endforeach
-                
             </table>
         </div>
         <div class="col-md-4">
