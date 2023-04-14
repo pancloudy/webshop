@@ -54,7 +54,7 @@
             <a class="nav-link" href="{{ url('product') }}">Termékek</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Rólunk</a>
+            <a class="nav-link" href="{{ url('category') }}">Kategóriák</a>
           </li>
           
           <li class="nav-item">

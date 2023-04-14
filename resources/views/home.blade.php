@@ -49,8 +49,7 @@
     <h1>Köszöntjük az oldalunkon!</h1>
   </div>
                 <?php
-                $product = DB::select('SELECT * from products');
-                $count = 0; 
+                $product = DB::select('SELECT * from products'); 
                 ?>
               <div class="container">
                 @foreach ($product as $products )
@@ -61,7 +60,7 @@
                     @csrf
                   
                   <div class="card" style="width: 18rem;">
-                    <img src="{{ asset('images/' . $products->image) }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('images/' . $products->image) }}" class="card-img-top">
                     <div class="card-body">
                       <h5 class="card-title">{{ $products->name }}</h5>
                       <p class="card-text">{{ $products->small_description }}</p>

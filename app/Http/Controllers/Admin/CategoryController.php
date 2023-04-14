@@ -14,7 +14,6 @@ class CategoryController extends Controller
         return view('admin.category.index')->with('category', $category);
     }
     public function list(){
-        
         $category = Category::all();
         return view('categories-list')->with('category', $category);
     }
@@ -96,6 +95,11 @@ class CategoryController extends Controller
 
         $category = DB::delete('delete from categories where id=?', [$id]);
         return redirect('categories');
+    }
+    public function select(Request $request){
+        $id = $request->input('id');
+        $product = DB::select('SELECT * FROM products WHERE category_id=?', $id);
+        return view('products-list')->with('product', $product);
     }
 }
 
