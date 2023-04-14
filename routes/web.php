@@ -36,7 +36,7 @@ Route::get('product', [ProductController::class, 'list'])->name('products.list')
 Route::post('product/{slug}/{image}', [ProductController::class, 'details'])->name('products.details');
 
 Route::get('category', [CategoryController::class, 'list'])->name('categories.list');
-Route::get('category/select', [CategoryController::class, 'select'])->name('categories.select');
+Route::get('category/list', [CategoryController::class, 'select'])->name('categories-products-list');
 
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');

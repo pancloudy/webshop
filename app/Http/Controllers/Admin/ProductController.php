@@ -58,9 +58,6 @@ class ProductController extends Controller
         return view('admin.product.edit', ['product'=>$product], ['id'=>$id]);
     }
     public function update(Request $request, $id){
-        $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
-        $request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
 
         $category_id=$request->get('category_id');
         $name=$request->get('name');
@@ -71,9 +68,20 @@ class ProductController extends Controller
         $quantity=$request->get('quantity');
         $status=$request->get('status');
 
-        $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
+        if($request->input('image') != NULL){
+            $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+            $request->image->extension();
+            $request->image->move(public_path('images'), $newImageName);
+            $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
         original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
          $description, $original_price, $selling_price, $newImageName, $quantity, $status, $id]);
+        }
+        else{
+            $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
+        original_price=?, selling_price=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
+         $description, $original_price, $selling_price, $quantity, $status, $id]);
+        }
+        
 
         if($product){
             $redirect = redirect('products')->with('success');

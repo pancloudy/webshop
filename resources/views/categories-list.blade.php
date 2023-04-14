@@ -23,8 +23,8 @@
     
       <div class="container">
     @foreach ($category as $categories )
-  <form action="{{ route('categories.select') }}" method="get" enctype="multipart/form-data">
-      
+  <form action="{{ route('categories-products-list') }}" method="get" enctype="multipart/form-data">
+      @csrf
       <input type="hidden" name="id" value="{{ $categories->id }}">
       <div class="card" style="width: 18rem;">
         <img src="{{ asset('images/' . $categories->image) }}" class="card-img-top">

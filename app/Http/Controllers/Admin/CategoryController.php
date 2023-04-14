@@ -17,10 +17,7 @@ class CategoryController extends Controller
         $category = Category::all();
         return view('categories-list')->with('category', $category);
     }
-    public function details($image){
-        $category = DB::select('SELECT * from categories where image=?', [$image]);
-        return view('categories-details', ['category'=>$category], ['image'=>$image]);
-    }
+    
     public function add(){
         return view('admin.category.add');
     }
@@ -58,30 +55,22 @@ class CategoryController extends Controller
     }
     public function update(Request $request, $id){
 
-
-        if($request->image != NULL){
-            $request->validate([
-                'image' => 'required|mimes:png,jpg,jpeg|max:5048'
-            ]);
-    
-            $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
-    
-            $request->image->extension();
-    
-            $request->image->move(public_path('images'), $newImageName);
-    
-            }else{
-                $newImageName=NULL;
-            }
-
         $name=$request->get('name');
         $description=$request->get('description');
         $slug=$request->get('slug');
         $status=$request->get('status');
-        //$image=$request->get('image');
-        $category = DB::update('update categories set name=?, description=?, 
-        slug=?, status=?, image=? where id=?',[$name, $description, $slug, $status, $newImageName, $id]);
 
+        if($request->input('image') != NULL){
+            $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+            $request->image->extension();
+            $request->image->move(public_path('images'), $newImageName);
+            $category = DB::update('update categories set name=?, description=?, 
+        slug=?, status=?, image=? where id=?',[$name, $description, $slug, $status, $newImageName, $id]);
+            }
+            else{
+                $category = DB::update('update categories set name=?, description=?, 
+        slug=?, status=? where id=?',[$name, $description, $slug, $status, $id]);
+            }
 
 
         if($category){
@@ -99,7 +88,7 @@ class CategoryController extends Controller
     public function select(Request $request){
         $id = $request->input('id');
         $product = DB::select('SELECT * FROM products WHERE category_id=?', $id);
-        return view('products-list')->with('product', $product);
+        return view('categories-products-list')->with('product', $product);
     }
 }
 
