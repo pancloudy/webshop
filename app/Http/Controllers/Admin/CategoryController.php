@@ -86,9 +86,8 @@ class CategoryController extends Controller
         return redirect('categories');
     }
     public function select(Request $request){
-        $id = $request->input('id');
-        $product = DB::select('SELECT * FROM products WHERE category_id=?', $id);
-        return view('categories-products-list')->with('product', $product);
+        $categ_id = $request->input('id');
+        return view('categories-products-list', compact('categ_id'));
     }
 }
 
