@@ -22,6 +22,9 @@
     </style>
     
       <div class="container">
+        <?php 
+        $product = DB::select('SELECT * FROM products WHERE category_id=?', [$categ_id]);
+        ?>
     @foreach ($product as $products )
     <?php 
     $slug = DB::table('categories')->where('id', $products->category_id)->value('slug');
