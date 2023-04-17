@@ -27,16 +27,20 @@ class ProductController extends Controller
         return view('admin.product.add');
     }
     public function save(Request $request){
-        
-        $request->validate([
-            'image' => 'required|mimes:png,jpg,jpeg|max:5048'
-        ]);
-
-        $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
-
-        $request->image->extension();
-
-        $request->image->move(public_path('images'), $newImageName);
+        if($request->image != NULL){
+            $request->validate([
+                'image' => 'required|mimes:png,jpg,jpeg|max:10048'
+            ]);
+    
+            $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+    
+            $request->image->extension();
+    
+            $request->image->move(public_path('images'), $newImageName);
+    
+            }else{
+                $newImageName=NULL;
+            }
 
         Product::create([
             'category_id' => $request->input('category_id'),
@@ -67,27 +71,42 @@ class ProductController extends Controller
         $selling_price=$request->get('selling_price');
         $quantity=$request->get('quantity');
         $status=$request->get('status');
+        $image=$request->input('image');
 
-        if($request->input('image') != NULL){
+        if($request->image != NULL){
+            $request->validate([
+                'image' => 'required|mimes:png,jpg,jpeg|max:10048'
+            ]);
+    
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+    
             $request->image->extension();
+    
             $request->image->move(public_path('images'), $newImageName);
-            $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
-        original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
-         $description, $original_price, $selling_price, $newImageName, $quantity, $status, $id]);
+    
         }
         else{
-            $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
-        original_price=?, selling_price=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
-         $description, $original_price, $selling_price, $quantity, $status, $id]);
-        }
+                $newImageName=NULL;
+            }
+            
+            if($newImageName == NULL){
+                DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
+                original_price=?, selling_price=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
+                 $description, $original_price, $selling_price, $quantity, $status, $id]);
+            }
+            else{
+                DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
+        original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
+         $description, $original_price, $selling_price, $newImageName, $quantity, $status, $id]);
+            }
+            
+        
+        
         
 
-        if($product){
+        
             $redirect = redirect('products')->with('success');
-        }else{
-            $redirect = redirect('products.edit')->with('error');
-        }
+        
         return $redirect;
     }
     public function delete($id){

@@ -100,7 +100,6 @@
                                       document.getElementById('logout-form').submit();">
                                       {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -113,4 +112,12 @@
 <body>
   @yield('content')
 </body>
+<footer>
+  <div class="card">
+    <div class="card-body" style="background-color:#23272b" style="color:#ffffff:">
+      <h5 class="card-title" style="color:#fff">Special title treatment</h5>
+      <p class="card-text" style="color:#fff">With supporting text below as a natural lead-in to additional content.</p>
+    </div>
+  </div>
+</footer>
 </html>

@@ -60,24 +60,37 @@ class CategoryController extends Controller
         $slug=$request->get('slug');
         $status=$request->get('status');
 
-        if($request->input('image') != NULL){
+
+        if($request->image != NULL){
+            $request->validate([
+                'image' => 'required|mimes:png,jpg,jpeg|max:10048'
+            ]);
+    
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+    
             $request->image->extension();
+    
             $request->image->move(public_path('images'), $newImageName);
-            $category = DB::update('update categories set name=?, description=?, 
-        slug=?, status=?, image=? where id=?',[$name, $description, $slug, $status, $newImageName, $id]);
+    
+        }
+        else{
+                $newImageName=NULL;
+            }
+
+            if($newImageName == NULL){
+                DB::update('update categories set name=?, description=?, 
+                slug=?, status=? where id=?',[$name, $description, $slug, $status, $id]);
+            
             }
             else{
-                $category = DB::update('update categories set name=?, description=?, 
-        slug=?, status=? where id=?',[$name, $description, $slug, $status, $id]);
+                DB::update('update categories set name=?, description=?,
+             slug=?, status=?, image=? where id=?',[$name, $description, $slug, $status, $newImageName, $id]);
             }
 
 
-        if($category){
-            $redirect = redirect('categories')->with('success');
-        }else{
-            $redirect = redirect('categories.edit')->with('error');
-        }
+        
+            $redirect = redirect('categories');
+        
         return $redirect;
     }
     public function delete($id){
