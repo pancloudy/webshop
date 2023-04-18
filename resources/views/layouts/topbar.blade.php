@@ -25,7 +25,7 @@
     }
     .navbar-nav .nav-link {
       color: #fff;
-      font-size: 20px;
+      font-size: 18px;
     }
     .navbar-nav > li{
     
@@ -45,9 +45,10 @@
     td{
       color:#000000;
     }
+
   </style>
 
-  <nav class="navbar navbar-expand-lg navbar-dark">
+  <nav class="navbar navbar-expand-xl navbar-dark">
       <a class="navbar-brand" href="{{ route('home') }}"> Hangszer Webshop</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -112,12 +113,44 @@
 <body>
   @yield('content')
 </body>
-<footer>
-  <div class="card">
-    <div class="card-body" style="background-color:#23272b" style="color:#ffffff:">
-      <h5 class="card-title" style="color:#fff">Special title treatment</h5>
-      <p class="card-text" style="color:#fff">With supporting text below as a natural lead-in to additional content.</p>
+<footer class="bg-light py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <h5>Rólunk</h5>
+        <p>Egy egyszerű hangszerbolt.</p>
+      </div>
+      <div class="col-lg-4">
+        <h5>Latest Posts</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Post Title 1</a></li>
+          <li><a href="#">Post Title 2</a></li>
+          <li><a href="#">Post Title 3</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h5>Contact Us</h5>
+        <address>
+          <strong>Hangszer webshop</strong><br>
+          Budapest<br>
+          Fő utca 12, 2040<br>
+          Telefonszám: (123)456-7890
+        </address>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-lg-6">
+        <p class="text-muted">&copy; 2023 Hangszer webshop. All rights reserved.</p>
+      </div>
+      <div class="col-lg-6 text-lg-end">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+          <li class="list-inline-item"><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </footer>
+
 </html>

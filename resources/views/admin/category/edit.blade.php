@@ -10,7 +10,7 @@
         @method('PUT')
         Név: <input type="text" name="name" value="{{ $categories->name }}">
         <br>
-        Leírás: <input type="text" name="description" value="{{ $categories->description }}">
+        Leírás: <input type="textarea" name="description"  value="{{ $categories->description }}">
         <br>
         Slug: <input type="text" name="slug" value="{{ $categories->slug }}">
         <br>
