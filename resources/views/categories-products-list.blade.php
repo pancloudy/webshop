@@ -25,11 +25,13 @@
         <?php 
         $product = DB::select('SELECT * FROM products WHERE category_id=?', [$categ_id]);
         ?>
+    @if($product != NULL)
     @foreach ($product as $products )
     <?php 
     $slug = DB::table('categories')->where('id', $products->category_id)->value('slug');
+    $exp = strtok($products->image, '.');
     ?>
-  <form action="{{ route('products.details', ['slug' => $slug, 'image' => $products->image]) }}" method="post" enctype="multipart/form-data">
+  <form action="{{ route('products.details', ['slug' => $slug, 'image' => $exp]) }}" method="post" enctype="multipart/form-data">
       @csrf
       <div class="card" style="width: 18rem;">
         <img src="{{ asset('images/' . $products->image) }}" class="card-img-top">
@@ -51,6 +53,9 @@
       </div>
   </form>
     @endforeach
+    @else
+    <h5>Nincs ilyen termék.</h5>
+    @endif
   </div>
     
 

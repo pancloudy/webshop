@@ -50,7 +50,7 @@ class OrdersController extends Controller
         DB::update('UPDATE cart SET status=2 where user_id=? AND status=1', [$uid]);
  
         echo '<script>alert("Megrendelve.")</script>';
-    
+        return view('home');
     }
     public function new(Request $request){
         $price = $request->input('price');

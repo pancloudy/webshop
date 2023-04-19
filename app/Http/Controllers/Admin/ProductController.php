@@ -20,8 +20,8 @@ class ProductController extends Controller
         return view('products-list')->with('product', $product);
     }
     public function details($slug, $image){
-        $product = DB::select('SELECT * from products where image=?', [$image]);
-        return view('products-details', ['slug'=>$slug], ['product'=>$product], ['image'=>$image]);;
+        $product = Product::where('image', 'LIKE', '%'.$image.'%')->get();
+        return view('products-details',  ['product'=>$product, 'image'=>$image, 'slug'=>$slug]);
     }
     public function add(){
         return view('admin.product.add');

@@ -17,7 +17,7 @@
                 @foreach ($orders1 as $order1 )
             <tr>
                 <td>
-                    {{ $order1->id ?? false}}
+                    {{ $order1->id ?? false}} order id
                 </td>
             </tr>
         <tr>
@@ -62,7 +62,7 @@
             
             <tr>
                 <td>
-                    {{ $order2->id ?? false}}
+                    {{ $order2->id ?? false}} order id
                 </td>
             </tr>
         <tr>
@@ -111,7 +111,7 @@
             
             <tr>
                 <td>
-                    {{ $order3->id ?? false}}
+                    {{ $order3->id ?? false}} order id
                 </td>
             </tr>
         <tr>
