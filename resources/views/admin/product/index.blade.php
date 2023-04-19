@@ -58,17 +58,17 @@
                     {{ $products->status ?? false}}
                 </td>
                 <td>
-                    <form action="{{ route('products.edit', $products->id) }}"  class="btn btn-primary">
+                    <form action="{{ route('products.edit',
+                     $products->id) }}"  class="btn btn-primary">
                     @csrf
-                    
-                    <button class="btn btn-primary" type="submit">Szerkesztés</button>
+                    <button class="btn btn-primary"
+                     type="submit">Szerkesztés</button>
                     </form>
                     <form action="{{ route('products.delete', $products->id) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-primary" type="submit">Törlés</button>
                     </form>
-                    
                 </td>
             </tr>
         @endforeach

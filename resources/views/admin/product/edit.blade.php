@@ -23,7 +23,6 @@
         <img src="{{ asset('images/' . $products->image) }}" height="50" width = "50" class="img img-responsive" />
             Válasszon ki egy képet
             <input class="form-control"  type="file" name="image" id="image">
-
         <br>
         Mennyiség: <input type="text" name="quantity" value="{{ $products->quantity }}">
         <br>
