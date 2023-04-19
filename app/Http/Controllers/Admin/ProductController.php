@@ -31,13 +31,9 @@ class ProductController extends Controller
             $request->validate([
                 'image' => 'required|mimes:png,jpg,jpeg|max:10048'
             ]);
-    
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
-    
             $request->image->extension();
-    
             $request->image->move(public_path('images'), $newImageName);
-    
             }else{
                 $newImageName=NULL;
             }
@@ -52,7 +48,6 @@ class ProductController extends Controller
             'image' => $newImageName,
             'quantity' => $request->input('quantity'),
             'status' => $request->input('status'),
-            
         ]);
 
         return redirect('/products/add');

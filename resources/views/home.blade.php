@@ -58,7 +58,6 @@
                   ?>
                   <form action="{{ route('products.details', ['slug' => $slug, 'image' => $products->image]) }}" method="post" enctype="multipart/form-data">
                     @csrf
-                  
                   <div class="card" style="width: 18rem;">
                     <img src="{{ asset('images/' . $products->image) }}" class="card-img-top">
                     <div class="card-body">
