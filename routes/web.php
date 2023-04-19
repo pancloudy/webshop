@@ -46,6 +46,7 @@ Route::delete('cart/delete/{id}', [CartController::class, 'delete'])->name('cart
 
 Route::post('order/save', [OrdersController::class, 'save'])->name('order.save');
 Route::get('order/new', [OrdersController::class, 'new'])->name('order.new');
+Route::get('order/history', [OrdersController::class, 'history'])->name('order.history');
 
 
 Route::middleware(['auth','admin'])->group(function() {

@@ -65,4 +65,8 @@ class OrdersController extends Controller
         DB::update('UPDATE orders set status = ? where id = ?', [$status, $id]);
         return view('admin.orders.index');
     }
+    public function history(){
+        $uid = Auth::user()->id;
+        return view('order-history')->with('uid', $uid);
+    }
 }

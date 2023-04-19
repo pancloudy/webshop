@@ -96,6 +96,7 @@
                             {{ Auth::user()->name }}
                         </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
+                                    <a class="dropdown-item" href="{{ route('order.history') }}">Rendelési előzmények</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                       onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
@@ -104,6 +105,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    
                               </ul>
                             
                 @endguest
