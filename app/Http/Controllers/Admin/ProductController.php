@@ -94,12 +94,6 @@ class ProductController extends Controller
         original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
          $description, $original_price, $selling_price, $newImageName, $quantity, $status, $id]);
             }
-            
-        
-        
-        
-
-        
             $redirect = redirect('products')->with('success');
         
         return $redirect;
