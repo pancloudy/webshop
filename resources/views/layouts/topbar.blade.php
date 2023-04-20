@@ -31,7 +31,7 @@
     
     }
     .nav-item{
-      padding-right: 100px;
+      padding-right: 89px;
     }
     .btn-primary {
       background-color: #58b86d;
@@ -47,33 +47,33 @@
     }
 
   </style>
-
-  <nav class="navbar navbar-expand-xl navbar-dark">
+  
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav ml-auto">
       <a class="navbar-brand" href="{{ route('home') }}"> Hangszer Webshop</a>
-        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="{{ url('product') }}">Termékek</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('category') }}">Kategóriák</a>
           </li>
-          
           <li class="nav-item">
             <a class="nav-link">
             <form action="{{ route('search') }}">
                 <input type="text" name="search">
-                <button type="submit" class="btn btn-primary">Keresés</button>
+                <button type="submit" class="btn btn-primary" style="font-size: 15px">Keresés</button>
             </form>
             </a>
           </li>
-        
           <li class="nav-item">
             @if (Auth::user())
               @if (Auth::user()->role == '1')
-                <a class="nav-link" href="{{ url('dashboard') }}">Dashboard</a>
-              @endif
-              @if (Auth::user()->role == '2')
+                <a class="nav-link" href="{{ url('dashboard') }}" style="margin-right: 14px">Dashboard</a>
+              @elseif (Auth::user()->role == '2')
                 <a class="nav-link" href="{{ route('users.index') }}">Super admin</a>
+              @else 
+                <a class="nav-link" href="" style="margin-right: 102px"></a>
               @endif
             @endif
           </li>
@@ -83,18 +83,32 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item" >
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Belépés') }}</a>
                         </li>
                     @endif
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Regisztrálás') }}</a>
                         </li>
                     @endif
                     @else
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                        
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
-                        </a>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="{{ route('order.history') }}">Rendelési előzmények</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                              onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                              {{ __('Logout') }}
+                            </a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                          </form>
+                          </ul>
+                        </li>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                     <a class="dropdown-item" href="{{ route('order.history') }}">Rendelési előzmények</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
