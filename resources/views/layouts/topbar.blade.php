@@ -98,7 +98,7 @@
                             {{ Auth::user()->name }}
                           </a>
                           <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="{{ route('order.history') }}">Rendelési előzmények</a></li>
+                            <li><a class="dropdown-item" href="{{ route('order.history') }}" style="font-size: 14px">Rendelési előzmények</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}"
                               onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
