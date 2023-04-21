@@ -1,10 +1,22 @@
 @extends('layouts.topbar')
 
 @section('content')
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+    h4{
+        justify-content: center;
+        display: flex;
+    }
+</style>
     <div class="card-header">
         <h4>Kategóriák szerkesztése</h4>
     </div>
     @foreach ($category as $categories)
+    <div class="container">
+        <div class="col-md-3">
     <form action="{{ action('App\Http\Controllers\Admin\CategoryController@update', $categories->id) }}"  enctype="multipart/form-data" method="post">
         @csrf
         @method('PUT')
@@ -34,13 +46,16 @@
         </select>
         @endif
         <br>
-        <img src="{{ asset('images/' . $categories->image) }}" height="50" width = "50" class="img img-responsive" />
+        <button class="btn btn-primary" type="submit">Küldés</button>
+        </div>
+        <div class="col-md-3">
+        <img src="{{ asset('images/' . $categories->image) }}" style="width: 18rem;" class="img img-responsive" />
+        <br>
             Válasszon ki egy képet:
             <input class="form-control" type="file" name="image" id="image">
-
-        <br>
-
-        <button class="btn btn-primary" type="submit">Küldés</button>
+        </div>
+        
     </form>
     @endforeach
+</div>
 @endsection

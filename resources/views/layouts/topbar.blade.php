@@ -109,18 +109,6 @@
                           </form>
                           </ul>
                         </li>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                    <a class="dropdown-item" href="{{ route('order.history') }}">Rendelési előzmények</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                      onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">
-                                      {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                    
-                              </ul>
                             
                 @endguest
                   </ul>

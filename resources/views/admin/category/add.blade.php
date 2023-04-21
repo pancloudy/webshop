@@ -1,9 +1,21 @@
 @extends('layouts.topbar')
 
 @section('content')
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+    h4{
+        justify-content: center;
+        display: flex;
+    }
+</style>
     <div class="card-header">
         <h4>Új kategória</h4>
     </div>
+    <div class="container">
+        <div class="col-md-3">
     <form action="{{ route("categories.save") }}" method="post" enctype="multipart/form-data">
         @csrf
         Név: <input type="text" name="name" value="">
@@ -28,4 +40,6 @@
     
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
+</div>
+</div>
 @endsection

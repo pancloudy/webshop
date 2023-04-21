@@ -1,10 +1,20 @@
 @extends('layouts.topbar')
 
 @section('content')
-    <div class="card-header">
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+        }
+        h4{
+            justify-content: center;
+            display: flex;
+        }
+    </style>
         <h4>Termékek szerkesztése</h4>
-    </div>
     @foreach ($product as $products)
+    <div class="container">
+        <div class="col-md-3">
     <form action="{{ action('App\Http\Controllers\Admin\ProductController@update', $products->id) }}"  enctype="multipart/form-data" method="post">
         @csrf
         @method('PUT')
@@ -19,10 +29,6 @@
         Eredeti ár: <input type="text" name="original_price" value="{{ $products->original_price }}">
         <br>
         Leárazott ár: <input type="text" name="selling_price" value="{{ $products->selling_price }}">
-        <br>
-        <img src="{{ asset('images/' . $products->image) }}" height="50" width = "50" class="img img-responsive" />
-            Válasszon ki egy képet
-            <input class="form-control"  type="file" name="image" id="image">
         <br>
         Mennyiség: <input type="text" name="quantity" value="{{ $products->quantity }}">
         <br>
@@ -48,6 +54,15 @@
         @endif
         <br>
         <button class="btn btn-primary" type="submit">Küldés</button>
+        </div>
+        <div class="col-md-4">
+        <img src="{{ asset('images/' . $products->image) }}" style="width: 18rem;" class="img img-responsive" />
+        <br>
+            Válasszon ki egy képet
+            <input class="form-control"  type="file" name="image" id="image">
+        </div>
+
     </form>
     @endforeach
+</div>
 @endsection

@@ -49,8 +49,9 @@
     <h1>Köszöntjük az oldalunkon!</h1>
   </div>
                 <?php
-                $product = DB::select('SELECT * from products'); 
+                $product = DB::select('SELECT * from products WHERE status=1 OR status=0'); 
                 ?>
+              @if($product)
               <div class="container">
                 @foreach ($product as $products )
                   <?php 
@@ -72,6 +73,9 @@
                         @else
                           <li class="list-group-item">{{ $products->selling_price }} ft</li>
                         @endif
+                        @if($products->status == 0)
+                          <li class="list-group-item">Elfogyott</li>
+                        @endif
                     </ul>
                     <div class="card-body">
                       <button class="btn btn-primary" type="submit">Megtekintés</button>
@@ -80,6 +84,9 @@
                 </form>
               @endforeach
             </div>
+            @else
+              <h5>Nincs megjeleníthető termék.</h5>
+            @endif
 </body>
 </html>
 @endsection

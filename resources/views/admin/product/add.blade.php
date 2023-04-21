@@ -1,9 +1,19 @@
 @extends('layouts.topbar')
 
 @section('content')
-    <div class="card-header">
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+        }
+        h4{
+            justify-content: center;
+            display: flex;
+        }
+    </style>
         <h4>Új termék</h4>
-    </div>
+        <br>
+   <div class="container">
     <div class="col-md-3">
     <form action="{{ route("products.save") }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -35,8 +45,10 @@
         <button class="btn btn-primary" type="submit">Küldés</button>
     </form>
 </div>
-<div class="col-md-3">
+<div class="col-md-2"></div>
+<div class="col-md-5">
     <table class="table table-bordered table-striped">
+        <h4>Választható kategóriák</h4>
         <?php
         $names=DB::select('SELECT * FROM categories'); 
         ?>
@@ -48,5 +60,6 @@
             <tr></tr>
         @endforeach
     </table>
+    </div>
 </div>
 @endsection
