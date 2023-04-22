@@ -64,15 +64,11 @@ class CategoryController extends Controller
 
         if($request->image != NULL){
             $request->validate([
-                'image' => 'required|mimes:png,jpg,jpeg,webp|max:10048'
+                'image' => 'required|mimes:png,jpg,jpeg,webp|max:10000'
             ]);
-    
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
-    
             $request->image->extension();
-    
             $request->image->move(public_path('images'), $newImageName);
-    
         }
         else{
                 $newImageName=NULL;
@@ -81,7 +77,6 @@ class CategoryController extends Controller
             if($newImageName == NULL){
                 $category = DB::update('update categories set name=?, description=?, 
                 slug=?, status=? where id=?',[$name, $description, $slug, $status, $id]);
-            
             }
             else{
                 $category = DB::update('update categories set name=?, description=?,

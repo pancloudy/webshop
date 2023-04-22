@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use app\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -29,7 +27,7 @@ class ProductController extends Controller
     public function save(Request $request){
         if($request->image != NULL){
             $request->validate([
-                'image' => 'required|mimes:png,jpg,jpeg|max:10048'
+                'image' => 'required|mimes:png,jpg,jpeg,webp|max:10000'
             ]);
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
             $request->image->extension();
@@ -70,36 +68,34 @@ class ProductController extends Controller
 
         if($request->image != NULL){
             $request->validate([
-                'image' => 'required|mimes:png,jpg,jpeg|max:10048'
+                'image' => 'required|mimes:png,jpg,jpeg,webp|max:10000'
             ]);
-    
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
-    
             $request->image->extension();
-    
             $request->image->move(public_path('images'), $newImageName);
-    
         }
         else{
                 $newImageName=NULL;
             }
             
             if($newImageName == NULL){
-                DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
+                $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
                 original_price=?, selling_price=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
                  $description, $original_price, $selling_price, $quantity, $status, $id]);
             }
             else{
-                DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
+                $product = DB::update('update products set category_id=?, name=?, small_description=?, description=?, 
         original_price=?, selling_price=?, image=?, quantity=?, status=? where id=?',[$category_id, $name, $small_description,
          $description, $original_price, $selling_price, $newImageName, $quantity, $status, $id]);
             }
-            $redirect = redirect('products')->with('success');
-        
-        return $redirect;
+            if($product){
+                $redirect = redirect('products')->with('success');
+            }else{
+                $redirect = redirect('products.edit')->with('error');
+            }
+            return $redirect;
     }
     public function delete($id){
-
         DB::delete('delete from products where id=?', [$id]);
         return redirect('products');
     }
