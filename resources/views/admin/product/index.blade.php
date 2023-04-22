@@ -59,7 +59,7 @@
                 </td>
                 <td>
                     <form action="{{ route('products.edit',
-                     $products->id) }}"  class="btn btn-primary">
+                     $products->id) }}">
                     @csrf
                     <button class="btn btn-primary"
                      type="submit">Szerkesztés</button>

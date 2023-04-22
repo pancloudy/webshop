@@ -15,7 +15,7 @@
     @foreach ($product as $products)
     <div class="container">
         <div class="col-md-3">
-    <form action="{{ action('App\Http\Controllers\Admin\ProductController@update', $products->id) }}"  enctype="multipart/form-data" method="post">
+    <form action="{{ action('App\Http\Controllers\Admin\ProductController@update', $products->id) }}"  enctype="multipart/form-data"  method="post">
         @csrf
         @method('PUT')
         Kategória ID: <input type="number" name="category_id" value="{{ $products->category_id }}">
@@ -61,8 +61,7 @@
             Válasszon ki egy képet
             <input class="form-control"  type="file" name="image" id="image">
         </div>
-
     </form>
-    @endforeach
 </div>
+    @endforeach
 @endsection
