@@ -2,64 +2,44 @@
 @section('content')
 
 <style>
-    img{
-      float: right;  
-    }
-    .container{
-        display: grid;
- align-items: center; 
- grid-template-columns: 1fr 1fr 1fr;
- column-gap: 5px;
-    }
-    .after{
-        padding-left: 20px;
-    }
+.container{
+    
+}
+.row{
+    align-content: center;
+}
 </style>
 
     @foreach ($product as $products)
-    
-                
     <div class="container">
-        
-    <table class="table table-bordered table-striped">  
-
-            <tr>
-                <th>Név:  <td>{{ $products->name ?? false}}</td></th>
-            </tr>
-            <tr>
-                <th>Rövid leírás <td>{{ $products->small_description ?? false}}</td></th>
-            </tr>
-            <tr>
-                <th>Description <td>{{ $products->description ?? false}}</td></th>
-            </tr>
-            <tr>
-                <th>Selling Price <td>{{ $products->selling_price ?? false}}</td></th>
-            </tr>
-            <tr>
-                <th>Original Price <td>{{ $products->original_price ?? false}}</td></th>
-            </tr>
-            <tr>
-                <th>Quantity <td>{{ $products->quantity ?? false}}</td></th>
-            </tr>
-            <tr>
-                <th>Status: <td>{{ $products->status ?? false}}</td></th>
-            </tr>    
-    
-    </table>
-    <div class="after">
-    <img src="{{ asset('images/' . $products->image) }}" height="100%" width="100%" />
-</div>
-            <br>
-            <form action="{{ action('App\Http\Controllers\Admin\CartController@add') }}" method="post" enctype="multipart/form-data" >
-                <br>
-                <input type="number" style="width:5em" name="prod_quant" value="1"></input>
-                <br>
+        <div class="row">
+          <div class="col-md-4">
+            <img src="{{ asset('images/' . $products->image) }}" height="auto" width="400" />
+          </div>
+          <div class="col-md-6">
+            <h2>{{ $products->name }}</h2>
+            <p class="lead">{{ $products->small_description }}</p>
+            <h5>Ár: @if ($products->original_price > $products->selling_price)
+                    <p style="text-decoration: line-through;">{{ $products->original_price }} ft</p>{{ $products->selling_price }}
+                @else
+                    {{ $products->selling_price }}
+                @endif
+                 ft</h5>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <form action="{{ action('App\Http\Controllers\Admin\CartController@add') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+              <div class="input-group">
+                <label class="input-group-text" for="quantity">Mennyiség</label>
+                <input type="number"  name="prod_quant" class="form-control" value="1" min="1" max="10">
                 <input type="hidden" name="prod_id" value="{{ $products->id }}"></input>
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"></input>
-                    <button type="submit" class="btn btn-primary" name="add">Kosárba</button>
-                @csrf
+              </div>
+              <button type="submit" class="btn btn-primary">Kosárba</button>
             </form>
-        
-</div>
+            </div>
+            <p><strong>{{ $products->description }}</strong></p>
+          </div>
+        </div>
+      </div>
     @endforeach
 @endsection

@@ -12,6 +12,13 @@
       background-color: #ffffff;
       margin: 0px;
     }
+    .container2{
+      display: flex;
+      flex-wrap: wrap;
+      width: 1500px;
+      justify-content: center;
+      margin: auto;
+    }
     .navbar {
       background-color: #1b2024;
     }
@@ -118,7 +125,7 @@
   @yield('content')
 </body>
 <footer class="bg-light py-4">
-  <div class="container">
+  <div class="container2">
     <div class="row">
       <div class="col-lg-4">
         <h5>Rólunk</h5>

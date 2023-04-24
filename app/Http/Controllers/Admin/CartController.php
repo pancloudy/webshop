@@ -40,7 +40,7 @@ class CartController extends Controller
             echo '<script>alert("Product added to cart.")</script>';
         }
 
-     return view('cart');   
+     return view('cart')->with('carts', $cart);   
     }
     public function delete($id){
         $cart = DB::delete('DELETE from cart where id=?', [$id]);
