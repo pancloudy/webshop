@@ -34,7 +34,7 @@ class OrdersController extends Controller
         $address = $request->input('address1')." ".$request->input('address2');
         $phone = $request->input('phone');
         $price = $request->input('price');
-        Orders::create([
+        $orders = Orders::create([
             'prod_id' => $prod_ids,
             'user_id' => $uid,
             'surname' => $surname,
@@ -47,8 +47,9 @@ class OrdersController extends Controller
             'status' => "0",
             'price' => $price
         ]);
+        DB::update('UPDATE cart SET order_id=? WHERE user_id=? AND status=1', [$orders->id, $uid]);
         DB::update('UPDATE cart SET status=2 where user_id=? AND status=1', [$uid]);
- 
+        
         echo '<script>alert("Megrendelve.")</script>';
         return view('home');
     }
