@@ -22,9 +22,7 @@ class CartController extends Controller
         $check = DB::select('SELECT prod_id from cart where user_id=? AND prod_id=? AND status=1', [$user_id, $prod_id]);
         
         if($check != NULL){
-            
             $amount = DB::table('cart')->where('user_id', $user_id)->where('prod_id', $prod_id)->where('status', 1)->value('prod_quantities');
-            
             $intamount = intval($amount);
             $quantity = $intamount+$prod_quant;
             DB::update('UPDATE cart set prod_quantities=? WHERE prod_id=?',[$quantity, $prod_id]);
