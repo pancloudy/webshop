@@ -25,7 +25,7 @@ class CategoryController extends Controller
         
         if($request->image != NULL){
         $request->validate([
-            'image' => 'required|mimes:png,jpg,jpeg,webp|max:10048'
+            'image' => 'required|mimes:png,jpg,jpeg,webp|max:2000000'
         ]);
 
         $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
@@ -64,7 +64,7 @@ class CategoryController extends Controller
 
         if($request->image != NULL){
             $request->validate([
-                'image' => 'required|mimes:png,jpg,jpeg,webp|max:10000'
+                'image' => 'required|mimes:png,jpg,jpeg,webp|max:2000000'
             ]);
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
             $request->image->extension();

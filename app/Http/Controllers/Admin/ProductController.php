@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function save(Request $request){
         if($request->image != NULL){
             $request->validate([
-                'image' => 'required|mimes:png,jpg,jpeg,webp|max:10000'
+                'image' => 'required|mimes:png,jpg,jpeg,webp|max:2000000'
             ]);
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
             $request->image->extension();
@@ -68,7 +68,7 @@ class ProductController extends Controller
 
         if($request->image != NULL){
             $request->validate([
-                'image' => 'required|mimes:png,jpg,jpeg,webp|max:10000'
+                'image' => 'required|mimes:png,jpg,jpeg,webp|max:2000000'
             ]);
             $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
             $request->image->extension();

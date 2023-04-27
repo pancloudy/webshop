@@ -40,7 +40,7 @@ Route::get('category/list', [CategoryController::class, 'select'])->name('catego
 
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
-Route::post('cart/', [CartController::class, 'add'])->name('cart.add');
+Route::post('cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('cart/save', [CartController::class, 'save'])->name('cart.save');
 Route::delete('cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 

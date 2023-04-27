@@ -35,15 +35,16 @@ class CartController extends Controller
                 'prod_id' => $prod_id,
                 'user_id' => $user_id,
                 'prod_quantities' => $prod_quant,
-                'status' => 1,
+                'status' => 1
             ]);
             echo '<script>alert("Product added to cart.")</script>';
         }
-
-     return view('cart')->with('carts', $cart);   
+        $id = Auth::user()->id;
+        $cart = DB::select('SELECT * from cart where user_id=? AND status=1', [$id]);
+        return view('cart')->with('carts', $cart);  
     }
     public function delete($id){
-        $cart = DB::delete('DELETE from cart where id=?', [$id]);
+        DB::delete('DELETE from cart where id=?', [$id]);
         return redirect('cart');
     }
 }
