@@ -15,17 +15,7 @@ class OrdersController extends Controller
     public function save(Request $request){
         $uid = Auth::user()->id;
         $prod_ids = "";
-        $incart = DB::select('SELECT prod_id, prod_quantities from cart where user_id=? AND status=1', [$uid]);
-        foreach ($incart as $value){
-            if($value->prod_quantities>1){
-                for($i = 0; $i < $value->prod_quantities; $i++){
-                $prod_ids=$prod_ids."|".$value->prod_id;
-                }
-            }else{
-                $prod_ids=$prod_ids."|".$value->prod_id;
-            }
-            
-        }
+        
         $surname = $request->input('surname');
         $forename = $request->input('forename');
         $country = $request->input('country');
@@ -35,7 +25,7 @@ class OrdersController extends Controller
         $phone = $request->input('phone');
         $price = $request->input('price');
         $orders = Orders::create([
-            'prod_id' => $prod_ids,
+            'prod_id' => 0,
             'user_id' => $uid,
             'surname' => $surname,
             'forename' => $forename,

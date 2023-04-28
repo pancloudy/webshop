@@ -14,7 +14,7 @@ class ProductController extends Controller
         return view('admin.product.index')->with('product', $product);
     }
     public function list(){
-        $product = DB::select('SELECT * from products WHERE status=1 OR status=0');
+        $product = DB::select('SELECT * from products WHERE status=1');
         return view('products-list')->with('product', $product);
     }
     public function details($slug, $image){

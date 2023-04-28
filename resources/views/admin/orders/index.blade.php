@@ -14,25 +14,27 @@
             <?php 
         $orders1 = DB::select('SELECT * from orders WHERE status=0');
             ?>
-                @foreach ($orders1 as $order1 )
+                @foreach ($orders1 as $order1)
+        <?php
+        $carts1 = DB::select('SELECT * from cart WHERE order_id = ?', [$order1->id]); 
+        ?>
+                
             <tr>
                 <td>
                     {{ $order1->id ?? false}} order id
                 </td>
             </tr>
+            
         <tr>
             <td>
-                <?php
-                $exp = explode("|", $order1->prod_id); 
-                ?>
-                @for ($i = 1; $i<count($exp); $i=$i+1 )
+                @foreach ($carts1 as $cart1)
                 <?php 
-                $element = $exp[$i];
-                $name = DB::table('products')->where('id', $element)->value('name');
-                ?>
-                {{ $element }} {{ $name }}
-                <br>
-                @endfor
+                    $id = DB::table('products')->where('id', $cart1->prod_id)->value('id');
+                    $name = DB::table('products')->where('id', $cart1->prod_id)->value('name');
+                    ?>
+                         {{ $id }} {{ $name }}
+                    <br>
+                @endforeach
                 <form method="POST" enctype="multipart/form-data" action="{{ action('App\Http\Controllers\Admin\OrdersController@status') }}">
                     @csrf
                     <input type="hidden" name="id" value="{{ $order1->id }}">
@@ -67,19 +69,14 @@
             </tr>
         <tr>
             <td>
-                <?php
-                $exp = explode("|", $order2->prod_id); 
-                ?>
-                @for ($i = 1; $i<count($exp); $i=$i+1 )
+                @foreach ($carts1 as $cart1)
                 <?php 
-                $element = $exp[$i];
-                
-                $name = DB::table('products')->where('id', $element)->value('name');
-            
-                ?>
-                {{ $element }} {{ $name }}
-                <br>
-                @endfor
+                    $id = DB::table('products')->where('id', $cart1->prod_id)->value('id');
+                    $name = DB::table('products')->where('id', $cart1->prod_id)->value('name');
+                    ?>
+                         {{ $id }} {{ $name }}
+                    <br>
+                @endforeach
                 <form method="POST" enctype="multipart/form-data" action="{{ action('App\Http\Controllers\Admin\OrdersController@status') }}">
                     @csrf
                     <input type="hidden" name="id" value="{{ $order2->id }}">
@@ -116,19 +113,14 @@
             </tr>
         <tr>
             <td>
-                <?php
-                $exp = explode("|", $order3->prod_id); 
-                ?>
-                @for ($i = 1; $i<count($exp); $i=$i+1 )
+                @foreach ($carts1 as $cart1)
                 <?php 
-                $element = $exp[$i];
-                
-                $name = DB::table('products')->where('id', $element)->value('name');
-            
-                ?>
-                {{ $element }} {{ $name }}
-                <br>
-                @endfor
+                    $id = DB::table('products')->where('id', $cart1->prod_id)->value('id');
+                    $name = DB::table('products')->where('id', $cart1->prod_id)->value('name');
+                    ?>
+                         {{ $id }} {{ $name }}
+                    <br>
+                @endforeach
                 <form method="POST" enctype="multipart/form-data" action="{{ action('App\Http\Controllers\Admin\OrdersController@status') }}">
                     @csrf
                     <input type="hidden" name="id" value="{{ $order3->id }}">

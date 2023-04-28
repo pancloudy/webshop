@@ -49,7 +49,7 @@
     <h1>Köszöntjük az oldalunkon!</h1>
   </div>
                 <?php
-                $product = DB::select('SELECT * from products WHERE status=1 OR status=0'); 
+                $product = DB::select('SELECT * from products WHERE status=1'); 
                 ?>
               @if($product)
               <div class="container">

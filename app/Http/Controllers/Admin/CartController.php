@@ -29,7 +29,7 @@ class CartController extends Controller
         }
         else{    
         
-        $cart = Carts::create([
+        Carts::create([
                 'prod_id' => $prod_id,
                 'user_id' => $user_id,
                 'prod_quantities' => $prod_quant,
