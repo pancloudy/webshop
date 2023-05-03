@@ -29,17 +29,23 @@
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Rendelés szám: {{ $orders->id }}</h5>
-          <p class="card-text"><?php
-            $exp = explode("|", $orders->prod_id); 
+          <p class="card-text">
+            <?php
+            $cart = DB::select('SELECT * FROM cart where order_id=?', [$orders->id]);
             ?>
-            @for ($i = 1; $i<count($exp); $i=$i+1 )
-            <?php 
-            $element = $exp[$i];
-            $name = DB::table('products')->where('id', $element)->value('name');
-            ?>
-            {{ $element }} {{ $name }}
-            <br>
-            @endfor</p>
+            @foreach ($cart as $carts )
+              <?php
+                $prod = DB::table('products')->where('id', $carts->prod_id)->value('name');
+              ?>
+              @if ($carts->prod_quantities > 1)
+                @for ($i = 0; $i < $carts->prod_quantities; $i++)
+                  <br>{{ $prod }}
+                @endfor
+              @else
+              <br>{{ $prod }}
+              @endif 
+            @endforeach
+           </p>
         </div>
         <ul class="list-group list-group-flush">
               <li class="list-group-item">Rendelő: {{ $orders->surname }} {{ $orders->forename }}</li>

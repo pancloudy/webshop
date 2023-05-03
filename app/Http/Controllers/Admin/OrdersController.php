@@ -14,8 +14,6 @@ class OrdersController extends Controller
 {
     public function save(Request $request){
         $uid = Auth::user()->id;
-        $prod_ids = "";
-        
         $surname = $request->input('surname');
         $forename = $request->input('forename');
         $country = $request->input('country');
@@ -25,7 +23,6 @@ class OrdersController extends Controller
         $phone = $request->input('phone');
         $price = $request->input('price');
         $orders = Orders::create([
-            'prod_id' => 0,
             'user_id' => $uid,
             'surname' => $surname,
             'forename' => $forename,

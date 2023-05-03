@@ -17,7 +17,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('order_id');
-            $table->bigInteger('prod_id');
             $table->bigInteger('user_id');
             $table->string('country');
             $table->string('zip');
