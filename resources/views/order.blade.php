@@ -21,7 +21,7 @@
                 <th>Vezetéknév:  <td><input type="text" name="surname" placeholder="Vezetéknév" required></td></th>
             </tr>
             <tr>
-                <th>Keresztnév:  <td><input type="text" name="forename" placeholder="Keresztnév" required</td></th>
+                <th>Keresztnév:  <td><input type="text" name="forename" placeholder="Keresztnév" required></td></th>
             </tr>
             <tr>
                 <th>Ország:  <td><input type="text" name="country" placeholder="Magyarország" required></td></th>
