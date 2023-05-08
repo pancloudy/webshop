@@ -29,16 +29,25 @@
       margin-left: 10px;
       color: #fff;
       font-weight: bold;
+      
+    }
+    .navbar-brand:focus{
+      color:#58b86d;
     }
     .navbar-nav .nav-link {
       color: #fff;
       font-size: 18px;
     }
-    .navbar-nav > li{
     
+    .nav-link{
+      color:#fff;
+      font-size: 18px;
     }
-    .nav-item{
-      padding-right: 89px;
+    .nav-link:hover{
+      color:#58b86d;
+    }
+    .nav-link:focus{
+      color:#58b86d;
     }
     .btn-primary {
       background-color: #58b86d;
@@ -52,28 +61,31 @@
     td{
       color:#000000;
     }
-
+    input:hover{
+      color:#58b86d;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
   </style>
   
   
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <ul class="navbar-nav ml-auto">
-      <a class="navbar-brand" href="{{ route('home') }}"> Hangszer Webshop</a>
-          <li class="nav-item">
+  <nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url('home') }}"> Hangszer Webshop</a>
+          
             <a class="nav-link" href="{{ url('product') }}">Termékek</a>
-          </li>
-          <li class="nav-item">
+          
+          
             <a class="nav-link" href="{{ url('category') }}">Kategóriák</a>
-          </li>
-          <li class="nav-item">
+          
+          
             <a class="nav-link">
             <form action="{{ route('search') }}">
-                <input type="text" name="search">
+                <input type="text" name="search" placeholder="Mit keres?">
                 <button type="submit" class="btn btn-primary" style="font-size: 15px">Keresés</button>
             </form>
             </a>
-          </li>
-          <li class="nav-item">
+          
+          
             @if (Auth::user())
               @if (Auth::user()->role == '1')
                 <a class="nav-link" href="{{ url('dashboard') }}" style="margin-right: 14px">Dashboard</a>
@@ -83,28 +95,25 @@
                 <a class="nav-link" href="" style="margin-right: 102px"></a>
               @endif
             @endif
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{{ route('cart') }}">Kosár</a>
-          </li>
+          
                 @guest
                     @if (Route::has('login'))
-                        <li class="nav-item" >
+                        
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Belépés') }}</a>
-                        </li>
+                        
                     @endif
                     @if (Route::has('register'))
-                        <li class="nav-item">
+                        
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Regisztrálás') }}</a>
-                        </li>
+                        
                     @endif
                     @else
-                        
-                        <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" style="list-style-type: none">
                           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                           </a>
-                          <ul class="dropdown-menu dropdown-menu-dark">
+                          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-bg-startk">
                             <li><a class="dropdown-item" href="{{ route('order.history') }}" style="font-size: 14px">Rendelési előzmények</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}"
                               onclick="event.preventDefault();
@@ -115,10 +124,10 @@
                               @csrf
                           </form>
                           </ul>
-                        </li>
+                        </li> 
                             
                 @endguest
-                  </ul>
+                  </div>
   </nav>
 </head>
 <body>
