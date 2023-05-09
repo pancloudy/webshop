@@ -58,7 +58,7 @@
         <div class="col-md-4">
         <img src="{{ asset('images/' . $products->image) }}" style="width: 18rem;" class="img img-responsive" />
         <br>
-            Válasszon ki egy képet
+            Válasszon ki egy képet(max 2mb):
             <input class="form-control"  type="file" name="image" id="image">
         </div>
     </form>

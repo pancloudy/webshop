@@ -32,7 +32,7 @@
         </select>
         <br>
             
-            Válasszon ki egy képet:
+            Válasszon ki egy képet(max 2mb):
             <input class="form-control" type="file" name="image" id="image">
 
         <br>

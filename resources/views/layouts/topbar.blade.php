@@ -70,7 +70,7 @@
   
   <nav class="navbar navbar-expand-lg bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url('home') }}"> Hangszer Webshop</a>
+      <a class="navbar-brand" href="{{ route('home') }}"> Hangszer Webshop</a>
           
             <a class="nav-link" href="{{ url('product') }}">Termékek</a>
           

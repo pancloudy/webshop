@@ -51,7 +51,7 @@
         <div class="col-md-3">
         <img src="{{ asset('images/' . $categories->image) }}" style="width: 18rem;" class="img img-responsive" />
         <br>
-            Válasszon ki egy képet:
+            Válasszon ki egy képet(max 2mb):
             <input class="form-control" type="file" name="image" id="image">
         </div>
         

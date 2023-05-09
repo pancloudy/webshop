@@ -29,7 +29,7 @@
         <br>
         Leárazott ár: <input type="text" name="selling_price" value="">
         <br>  
-            Válasszon ki egy képet:
+            Válasszon ki egy képet(max 2mb):
             <input class="form-control" type="file" name="image" id="image">
         <br>
         Mennyiség: <input type="text" name="quantity" value="">

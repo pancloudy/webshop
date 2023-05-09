@@ -16,16 +16,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id');
             $table->bigInteger('user_id');
+            $table->string('surname');
+            $table->string('forename');
             $table->string('country');
             $table->string('zip');
             $table->string('city');
             $table->string('address');
             $table->string('phone');
-            $table->string('status');
-            $table->string('surename');
-            $table->string('forename');
+            $table->tinyInteger('status');
+            $table->integer('price');
             $table->timestamps();
         });
     }

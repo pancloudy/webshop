@@ -3,20 +3,24 @@
 
 <style>
 .container{
-    
+    display: flex;
+    justify-content: center;
 }
 .row{
     align-content: center;
+}
+.img{
+  
 }
 </style>
 
     @foreach ($product as $products)
     <div class="container">
-        <div class="row">
+        
           <div class="col-md-4">
             <img src="{{ asset('images/' . $products->image) }}" height="auto" width="400" />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <h2>{{ $products->name }}</h2>
             <p class="lead">{{ $products->small_description }}</p>
             <h5>Ár: @if ($products->original_price > $products->selling_price)
@@ -39,7 +43,7 @@
             </div>
             <p><strong>{{ $products->description }}</strong></p>
           </div>
-        </div>
+        
       </div>
     @endforeach
 @endsection

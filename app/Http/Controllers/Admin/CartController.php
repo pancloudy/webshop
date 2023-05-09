@@ -10,10 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index(){
-        $id = Auth::user()->id;
-        $cart = DB::select('SELECT * from cart where user_id=? AND status=1', [$id]);
-        return view('cart')->with('carts', $cart);
+        if (Auth::user()->id != NULL){
+            $id = Auth::user()->id;
+            $cart = DB::select('SELECT * from cart where user_id=? AND status=1', [$id]);
+            return view('cart')->with('carts', $cart);
+        }
+        else return view('home');
     }
     public function add(Request $request){
         $prod_id = $request->input('prod_id');
