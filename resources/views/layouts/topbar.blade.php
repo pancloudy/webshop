@@ -31,6 +31,9 @@
       font-weight: bold;
       
     }
+    .navbar-brand:hover{
+      color:#58b86d;
+    }
     .navbar-brand:focus{
       color:#58b86d;
     }
