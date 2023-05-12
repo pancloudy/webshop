@@ -32,14 +32,14 @@
             <option value="null">Nincs információ</option>
             <option value="0">Elfogyott</option>
         </select>
-        @elseif($products->status=="0")
-        <select name="status" value="{{ $products->status }}">
+        @elseif($categories->status=="0")
+        <select name="status" value="{{ $categories->status }}">
             <option value="0">Elfogyott</option>
             <option value="1">Raktáron</option>
             <option value="null">Nincs információ</option>
         </select>
         @else
-        <select name="status" value="{{ $products->status }}">
+        <select name="status" value="{{ $categories->status }}">
             <option value="null">Nincs információ</option>
             <option value="0">Elfogyott</option>
             <option value="1">Raktáron</option>
